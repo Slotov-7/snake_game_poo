@@ -22,7 +22,6 @@ public class GamePanel extends JPanel implements ActionListener {
     public int foodsEaten;
     public int foodX;
     public int foodY;
-    private  Color foodColor;
     public char direction = 'D';
     public boolean running = false;
     Timer timer;
@@ -37,7 +36,6 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void startGame() {
-        foodColor = randomColor();
         generateFood();
         running = true;
         timer = new Timer(DELAY, this);
@@ -53,7 +51,7 @@ public class GamePanel extends JPanel implements ActionListener {
             g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
             g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
         }
-        g.setColor(foodColor);
+        g.setColor(randomColor());
         g.fillOval(foodX, foodY, UNIT_SIZE, UNIT_SIZE);
 
         for(int i = 0; i < bodyParts;i++){
@@ -78,7 +76,6 @@ public class GamePanel extends JPanel implements ActionListener {
     public void generateFood() {
         foodX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
         foodY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
-        foodColor = randomColor();
     }
     public void move() {
         for (int i = bodyParts; i > 0 ; i--) {

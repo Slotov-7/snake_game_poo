@@ -1,5 +1,7 @@
 package screen;
 
+import game.GameFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,6 +44,7 @@ public class HomeScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Código para iniciar o jogo
                 System.out.println("Iniciando o jogo...");
+                new GameFrame().setVisible(true);  // Abre o jogo
                 dispose();  // Fecha a tela inicial
             }
         });

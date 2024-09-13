@@ -5,6 +5,8 @@ import screen.HomeScreen;
 public class Game {
     public static void main(String[] args) {
 
-        new HomeScreen();
+        // Executa a tela inicial
+        HomeScreen homeScreen = new HomeScreen();
+        homeScreen.setVisible(true);
     }
 }

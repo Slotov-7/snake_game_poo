@@ -53,6 +53,17 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         g.setColor(randomColor());
         g.fillOval(foodX, foodY, UNIT_SIZE, UNIT_SIZE);
+
+        for(int i = 0; i < bodyParts;i++){
+            if(i==0){
+                g.setColor(Color.green);
+                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+            }
+            else{
+                g.setColor(new Color(45,180,0));
+                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+            }
+        }
     }
 
     private Color randomColor() {
@@ -89,11 +100,40 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void checkFood() {
-
+        if((x[0] == foodX) && (y[0] == foodY)){
+            bodyParts++;
+            foodsEaten++;
+            generateFood();
+        }
     }
 
     public void checkCollisions() {
-
+        //checa se a cabeça colide com o corpo
+        for(int i = bodyParts; i>0;i--){
+            if((x[0]) == x[i] && (y[0]) == y[i]){
+                running = false;
+            }
+        }
+        //checa se a cabeça toca na borda esquerda
+        if (x[0] < 0) {
+            running = false;
+        }
+         //checa se a cabeça toca na borda direita
+         if (x[0] > SCREEN_WIDTH) {
+            running = false;
+        }
+        //checa se a cabeça toca na borda de cima
+        if (y[0] < 0) {
+            running = false;
+        }
+         //checa se a cabeça toca na borda de baixo
+         if (y[0] > SCREEN_HEIGHT) {
+            running = false;
+        }
+         
+        if(!running) {
+            timer.stop();
+        }
     }
     public void gameOver(Graphics g) {
 
@@ -102,11 +142,41 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if(running){
+            move();
+            checkFood();
+            checkCollisions();
+
+        }
+        repaint();
     }
     public class MyKayAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    if (direction != 'R') {
+                        direction = 'L';
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if (direction != 'L') {
+                        direction = 'R';
+                    }
+                    break;
+                case KeyEvent.VK_UP:
+                    if (direction != 'D') {
+                        direction = 'U';
+                    }
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if (direction != 'U') {
+                        direction = 'D';
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

@@ -7,12 +7,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static utils.ScreenUtils.getScreenHeight;
+import static utils.ScreenUtils.getScreenWidth;
+
 public class HomeScreen extends JFrame {
 
     public HomeScreen() {
         // Configurações da janela
         setTitle("Snake Game - Tela Inicial");
-        setSize(1080, 760);
+        int screenWidth =  getScreenWidth();
+        int screenHeight =  getScreenHeight();
+
+        setSize(screenWidth,screenHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);  // Centraliza a janela
 
@@ -95,6 +101,7 @@ public class HomeScreen extends JFrame {
         // Adiciona o painel à janela
         add(panel);
     }
+
 
     public static void main(String[] args) {
         // Executa a tela inicial

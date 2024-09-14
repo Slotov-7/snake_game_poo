@@ -1,5 +1,7 @@
 package game;
 
+import screen.HomeScreen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,10 +10,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import static utils.ScreenUtils.getScreenHeight;
+import static utils.ScreenUtils.getScreenWidth;
+
+
 public class GamePanel extends JPanel implements ActionListener {
 
-    public static final int SCREEN_WIDTH = 900;
-    public static final int SCREEN_HEIGHT = 900;
+    public static final int SCREEN_WIDTH =  getScreenWidth();
+    public static final int SCREEN_HEIGHT = (int) (getScreenHeight() * 0.95);
     public static final int UNIT_SIZE = 30;
     public static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
     public static final int DELAY = 75;
@@ -158,6 +164,24 @@ public class GamePanel extends JPanel implements ActionListener {
         g.setFont(new Font("Ink Free", Font.BOLD, 75));
         FontMetrics metrics2 = getFontMetrics(g.getFont());
         g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
+
+        JButton button = new JButton("Click Me!");
+        button = new JButton("Reiniciar Jogo");
+        button.setBounds((SCREEN_WIDTH - 300) / 2, SCREEN_HEIGHT / 2 + 50, 300, 40);;
+        button.setFont(new Font("Ink Free", Font.BOLD, 30));
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setOpaque(false);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("START");
+                HomeScreen homeScreen = new HomeScreen();
+                homeScreen.setVisible(true);
+            }
+        });
+    add(button);
     }
 
     @Override

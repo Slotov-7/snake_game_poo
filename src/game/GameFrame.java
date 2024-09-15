@@ -6,7 +6,7 @@ import java.awt.*;
 public class GameFrame extends JFrame {
 
     public GameFrame() {
-        GamePanel gamePanel = new GamePanel();
+        GamePanel gamePanel = new GamePanel(this);
         this.add(gamePanel);
         this.setTitle("Snake game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,5 +1,6 @@
 package game;
 
+import screen.GameOver;
 import screen.HomeScreen;
 
 import javax.swing.*;
@@ -17,10 +18,10 @@ import static utils.ScreenUtils.getScreenWidth;
 public class GamePanel extends JPanel implements ActionListener {
 
     public static final int SCREEN_WIDTH =  getScreenWidth();
-    public static final int SCREEN_HEIGHT = (int) (getScreenHeight() * 0.95);
+    public static final int SCREEN_HEIGHT = (int) (getScreenHeight() * 0.90);
     public static final int UNIT_SIZE = 30;
     public static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-    public static final int DELAY = 75;
+    public static int DELAY = 85;
     public final int[] x = new int[GAME_UNITS];
     public final int[] y = new int[GAME_UNITS];
     public int bodyParts = 6;
@@ -32,7 +33,9 @@ public class GamePanel extends JPanel implements ActionListener {
     public boolean running = false;
     Timer timer;
     Random random;
-    public GamePanel() {
+    private JFrame frame;
+    public GamePanel(JFrame frame) {
+        this.frame = frame;
         random = new Random();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.white);
@@ -44,6 +47,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public void startGame() {
         generateFood();
         running = true;
+        DELAY = 85;
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -122,6 +126,8 @@ public class GamePanel extends JPanel implements ActionListener {
             bodyParts++;
             foodsEaten++;
             generateFood();
+            DELAY = (int) Math.max((85 - 55 * (1 - Math.exp(-foodsEaten / 10.0))),20 );
+            timer.setDelay(DELAY);
         }
     }
 
@@ -154,34 +160,8 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
     public void gameOver(Graphics g) {
-        //placar
-        g.setColor(Color.red);
-        g.setFont(new Font("Ink Free", Font.BOLD, 40));
-        FontMetrics metrics1 = getFontMetrics(g.getFont());
-        g.drawString("Placar: "+foodsEaten, (SCREEN_WIDTH - metrics1.stringWidth("Placar: "+foodsEaten))/2, g.getFont().getSize());
-        //texto do Game Over
-        g.setColor(Color.red);
-        g.setFont(new Font("Ink Free", Font.BOLD, 75));
-        FontMetrics metrics2 = getFontMetrics(g.getFont());
-        g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
-
-        JButton button = new JButton("Click Me!");
-        button = new JButton("Reiniciar Jogo");
-        button.setBounds((SCREEN_WIDTH - 300) / 2, SCREEN_HEIGHT / 2 + 50, 300, 40);;
-        button.setFont(new Font("Ink Free", Font.BOLD, 30));
-        button.setFocusPainted(false);
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setOpaque(false);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("START");
-                HomeScreen homeScreen = new HomeScreen();
-                homeScreen.setVisible(true);
-            }
-        });
-    add(button);
+        frame.dispose();
+        new GameOver(foodsEaten).setVisible(true);
     }
 
     @Override

@@ -1,12 +1,14 @@
 package game;
-
+import music.Musica;
 import screen.HomeScreen;
 
 public class Game {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         // Executa a tela inicial
         HomeScreen homeScreen = new HomeScreen();
         homeScreen.setVisible(true);
+        Musica musica = new Musica();
+        musica.play();  // Toca a música de fundo
     }
 }

@@ -3,7 +3,7 @@ package game;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class Cobra {
+public class Snake {
     private static final int UNIT_SIZE = 30;
     private final int[] x;
     private final int[] y;
@@ -11,7 +11,7 @@ public class Cobra {
     private int foodsEaten;
     private char direction;
 
-    public Cobra(int gameUnits, int initialBodyParts) {
+    public Snake(int gameUnits, int initialBodyParts) {
         x = new int[gameUnits];
         y = new int[gameUnits];
         bodyParts = initialBodyParts;

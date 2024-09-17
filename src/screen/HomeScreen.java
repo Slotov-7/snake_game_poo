@@ -58,7 +58,11 @@ public class HomeScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Código para iniciar o jogo
                 System.out.println("Starting the game...");
-                new GameFrame().setVisible(true);  // Abre o jogo
+                try {
+                    new GameFrame().setVisible(true);  // Abre o jogo
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 dispose();  // Fecha a tela inicial
             }
         });

@@ -22,27 +22,31 @@ public class GamePanel extends JPanel implements ActionListener  {
     public static final int UNIT_SIZE = 30;
     public static final int INITIAL_DELAY = 85;
     public static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;;
-    public static final int bodyParts = 6;
+    public static final int bodyParts = 4;
     Timer timer;
     private final JFrame frame;
-    private final Cobra cobra;
-    private final Comida comida;
+    private final Snake snake;
+    private final Food food;
     public boolean running = false;
     public int DELAY = INITIAL_DELAY;
+    private final Musica musica;
 
-    public GamePanel(JFrame frame) {
+    public GamePanel(JFrame frame) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         this.frame = frame;
+
+        this.musica = new Musica();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        cobra = new Cobra(GAME_UNITS, bodyParts);
-        comida = new Comida(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE);
+        snake = new Snake(GAME_UNITS, bodyParts);
+        food = new Food(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE);
         this.setBackground(Color.white);
         this.setFocusable(true);
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                cobra.handleKeyPress(e.getKeyCode());
+                snake.handleKeyPress(e.getKeyCode());
             }
         });
+        musica.play("src/music/game.wav");
         startGame();
     }
 
@@ -64,14 +68,14 @@ public class GamePanel extends JPanel implements ActionListener  {
 
     public void draw(Graphics g) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if (running) {
-            comida.draw(g);
-            cobra.draw(g);
+            food.draw(g);
+            snake.draw(g);
 
             g.setColor(Color.red);
             g.setFont(new Font("Ink Free", Font.BOLD, 40));
             FontMetrics metrics = getFontMetrics(g.getFont());
-            g.drawString("Placar: " + cobra.getFoodsEaten(),
-                    (SCREEN_WIDTH - metrics.stringWidth("Placar: " + cobra.getFoodsEaten())) / 2,
+            g.drawString("scoreboard: " + snake.getFoodsEaten(),
+                    (SCREEN_WIDTH - metrics.stringWidth("scoreboard: " + snake.getFoodsEaten())) / 2,
                     g.getFont().getSize());
         } else {
             gameOver();
@@ -79,30 +83,31 @@ public class GamePanel extends JPanel implements ActionListener  {
     }
 
     public void checkFood() {
-        if (cobra.getX()[0] == comida.getFoodX() && cobra.getY()[0] == comida.getFoodY()) {
-            cobra.grow();
-            comida.generateFood();
-            DELAY = (int) Math.max((INITIAL_DELAY - 55 * (1 - Math.exp(-cobra.getFoodsEaten() / 10.0))), 20);
+        if (snake.getX()[0] == food.getFoodX() && snake.getY()[0] == food.getFoodY()) {
+            snake.grow();
+            food.generateFood();
+            DELAY = (int) Math.max((INITIAL_DELAY - 55 * (1 - Math.exp(-snake.getFoodsEaten() / 10.0))), 20);
             timer.setDelay(DELAY);
         }
     }
 
     public void checkCollisions() {
-        if (cobra.checkCollision() || cobra.checkOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
+        if (snake.checkCollision() || snake.checkOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
             timer.stop();
             running = false;
         }
     }
 
     public void gameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        musica.stop();
         frame.dispose();
-        new GameOver(cobra.getFoodsEaten()).setVisible(true);
+        new GameOver(snake.getFoodsEaten()).setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (running) {
-            cobra.move();
+            snake.move();
             checkFood();
             checkCollisions();
         }

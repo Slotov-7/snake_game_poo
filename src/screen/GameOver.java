@@ -28,7 +28,7 @@ public class GameOver extends JFrame {
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
-        JLabel scoreLabel = new JLabel("Placar: " + score, SwingConstants.CENTER);
+        JLabel scoreLabel = new JLabel("Scoreboard: " + score, SwingConstants.CENTER);
         scoreLabel.setFont(new Font("Ink Free", Font.BOLD, 40));
         scoreLabel.setForeground(Color.RED);
         this.add(scoreLabel, BorderLayout.NORTH);
@@ -38,7 +38,7 @@ public class GameOver extends JFrame {
         gameOverLabel.setForeground(Color.RED);
         this.add(gameOverLabel, BorderLayout.CENTER);
 
-        JButton restartButton = new JButton("Reiniciar Jogo");
+        JButton restartButton = new JButton("Restart game");
         restartButton.setFont(new Font("Ink Free", Font.BOLD, 30));
         restartButton.setFocusPainted(false);
         restartButton.setBorderPainted(false);

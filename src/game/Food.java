@@ -3,7 +3,7 @@ package game;
 import java.awt.*;
 import java.util.Random;
 
-public class Comida {
+public class Food {
     private int foodX;
     private int foodY;
     private Color foodColor;
@@ -12,7 +12,7 @@ public class Comida {
     private final int unitSize;
     private final Random random;
 
-    public Comida(int screenWidth, int screenHeight, int unitSize) {
+    public Food(int screenWidth, int screenHeight, int unitSize) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.unitSize = unitSize;

@@ -1,24 +1,32 @@
 package screen;
 
 import game.GameFrame;
+import music.Musica;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import static utils.ScreenUtils.getScreenHeight;
 import static utils.ScreenUtils.getScreenWidth;
 
 public class HomeScreen extends JFrame {
+    private final Musica musica; // Referência para a instância de Musica
 
-    public HomeScreen() {
+    public HomeScreen() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // Configurações da janela
-        setTitle("Snake Game - Tela Inicial");
-        int screenWidth =  getScreenWidth();
-        int screenHeight =  getScreenHeight();
+        musica = new Musica(); // Inicializa a música
+        musica.play("src/music/homescreen.wav"); // Toca a música da tela inicial
 
-        setSize(screenWidth,screenHeight);
+        setTitle("Snake Game - Tela Inicial");
+        int screenWidth = getScreenWidth();
+        int screenHeight = getScreenHeight();
+
+        setSize(screenWidth, screenHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);  // Centraliza a janela
 
@@ -102,11 +110,18 @@ public class HomeScreen extends JFrame {
         add(panel);
     }
 
+    @Override
+    public void dispose() {
+        // Para a música quando a tela é fechada
+        if (musica != null) {
+            musica.stop();
+        }
+        super.dispose(); // Chama o método dispose da superclasse
+    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // Executa a tela inicial
         HomeScreen homeScreen = new HomeScreen();
         homeScreen.setVisible(true);
     }
 }
-

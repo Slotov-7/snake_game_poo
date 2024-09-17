@@ -1,32 +1,31 @@
 package music;
-import javax.sound.sampled.*;
 
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
-
 public class Musica {
-    File file = new File("src/music/som.wav");
+    private Clip clip;
 
-    public static void main(String[] args) {
-        Musica musica = new Musica();
-        try {
-            musica.play();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+    // Método para tocar a música
+    public void play(String arquivo) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        // Carrega o arquivo de áudio
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(arquivo).getAbsoluteFile());
+
+        // Cria o Clip e abre o áudio
+        clip = AudioSystem.getClip();
+        clip.open(audioStream);
+
+        // Toca o áudio e configura o loop
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY); // O áudio vai se repetir continuamente
+    }
+
+    // Método para parar a música
+    public void stop() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close(); // Fecha o Clip para liberar recursos
         }
     }
-
-    public void play() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(String.valueOf(file)).getAbsoluteFile());
-
-          Clip clip = AudioSystem.getClip();
-          clip.open(audioStream);
-          clip.start();
-          clip.loop(Clip.LOOP_CONTINUOUSLY);
-
-    }
 }
-
-

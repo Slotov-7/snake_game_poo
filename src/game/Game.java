@@ -8,7 +8,6 @@ public class Game {
         // Executa a tela inicial
         HomeScreen homeScreen = new HomeScreen();
         homeScreen.setVisible(true);
-        Musica musica = new Musica();
-        musica.play();  // Toca a música de fundo
+
     }
 }

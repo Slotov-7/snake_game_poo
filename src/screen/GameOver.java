@@ -1,18 +1,23 @@
 package screen;
+import music.Musica;
 
-import game.GameFrame;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import static utils.ScreenUtils.getScreenHeight;
 import static utils.ScreenUtils.getScreenWidth;
 
 public class GameOver extends JFrame {
 
-    public GameOver(int score) {
+    public GameOver(int score) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        Musica musica = new Musica();
+        musica.play("src/music/gameover.wav");
         this.setTitle("Game Over");
         int screenWidth =  getScreenWidth();
         int screenHeight =  getScreenHeight();
@@ -43,7 +48,11 @@ public class GameOver extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new HomeScreen().setVisible(true);
+                try {
+                    new HomeScreen().setVisible(true);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                    throw new RuntimeException(ex);
+                }
 
             }
         });
@@ -51,4 +60,5 @@ public class GameOver extends JFrame {
         buttonPanel.add(restartButton);
         this.add(buttonPanel, BorderLayout.SOUTH);
     }
+
 }

@@ -1,18 +1,21 @@
 package game;
 
+import music.Musica;
 import screen.GameOver;
-
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import static utils.ScreenUtils.getScreenHeight;
 import static utils.ScreenUtils.getScreenWidth;
 
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener  {
 
     public static final int SCREEN_WIDTH =  getScreenWidth();
     public static final int SCREEN_HEIGHT = (int) (getScreenHeight() * 0.90);
@@ -24,7 +27,6 @@ public class GamePanel extends JPanel implements ActionListener {
     private final JFrame frame;
     private final Cobra cobra;
     private final Comida comida;
-
     public boolean running = false;
     public int DELAY = INITIAL_DELAY;
 
@@ -53,10 +55,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        draw(g);
+        try {
+            draw(g);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if (running) {
             comida.draw(g);
             cobra.draw(g);
@@ -88,7 +94,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    public void gameOver() {
+    public void gameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         frame.dispose();
         new GameOver(cobra.getFoodsEaten()).setVisible(true);
     }

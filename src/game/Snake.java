@@ -66,10 +66,10 @@ public class Snake {
 
     public void handleKeyPress(int keyCode) {
         switch (keyCode) {
-            case KeyEvent.VK_LEFT -> setDirection('L');
-            case KeyEvent.VK_RIGHT -> setDirection('R');
-            case KeyEvent.VK_UP -> setDirection('U');
-            case KeyEvent.VK_DOWN -> setDirection('D');
+            case KeyEvent.VK_LEFT, KeyEvent.VK_A -> setDirection('L');
+            case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> setDirection('R');
+            case KeyEvent.VK_UP, KeyEvent.VK_W -> setDirection('U');
+            case KeyEvent.VK_DOWN, KeyEvent.VK_S -> setDirection('D');
         }
     }
 

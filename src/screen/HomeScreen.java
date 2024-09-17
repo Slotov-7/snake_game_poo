@@ -22,27 +22,28 @@ public class HomeScreen extends JFrame {
         musica = new Musica(); // Inicializa a música
         musica.play("src/music/homescreen.wav"); // Toca a música da tela inicial
 
+        // Dimensões da janela
         setTitle("Snake Game - Tela Inicial");
-        int screenWidth = getScreenWidth();
-        int screenHeight = getScreenHeight();
+        int screenWidth = 1080 ; // Ou coloca getScreenWidth()
+        int screenHeight = 760 ; // Ou coloca getScreenHeight()
 
         setSize(screenWidth, screenHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);  // Centraliza a janela
 
-        // Painel principal
-        JPanel panel = new SnakePanel();
-        panel.setLayout(new BorderLayout());
+        // Painel principal com a imagem de fundo
+        BackgroundPanel backgroundPanel = new BackgroundPanel();
+        backgroundPanel.setLayout(new BorderLayout());
 
         // Título com uma fonte customizada e cor
-        JLabel titleLabel = new JLabel("SNAKE GAME", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 60));
-        titleLabel.setForeground(new Color(0, 255, 0));
-        panel.add(titleLabel, BorderLayout.NORTH);
+//        JLabel titleLabel = new JLabel("SNAKE GAME", SwingConstants.CENTER);
+//        titleLabel.setFont(new Font("Arial", Font.BOLD, 60));
+//        titleLabel.setForeground(new Color(0, 255, 0));
+//        panel.add(titleLabel, BorderLayout.NORTH);
 
         // Painel de botões com BoxLayout (alinhamento vertical)
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(50, 50, 50)); // Mesmo fundo do painel principal
+        buttonPanel.setBackground(new Color(50, 50, 50, 0)); // Fundo transparente
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); // Alinha na vertical
 
         // Botão "Jogar"
@@ -79,7 +80,7 @@ public class HomeScreen extends JFrame {
         creditButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Arte: Miguel Lucas\nProgramação: Miguel Lucas\nMúsica: Miguel Lucas\n© 2024 - Snake Game", "Créditos", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Arte: Miguel Lucas\nProgramação: Miguel e Lucas\nMúsica: Lucas Miguel\nAplicação: Miguel da XJ6\nEstagiários: Guilherme, Lex e Débora\n© 2024 - Snake Game", "Créditos", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
@@ -108,10 +109,10 @@ public class HomeScreen extends JFrame {
         buttonPanel.add(exitButton);
 
         // Adiciona o painel de botões à tela principal
-        panel.add(buttonPanel, BorderLayout.SOUTH);
+        backgroundPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         // Adiciona o painel à janela
-        add(panel);
+        add(backgroundPanel);
     }
 
     @Override

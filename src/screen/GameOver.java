@@ -14,9 +14,10 @@ import static utils.ScreenUtils.getScreenHeight;
 import static utils.ScreenUtils.getScreenWidth;
 
 public class GameOver extends JFrame {
-
+    private final Musica musica;
     public GameOver(int score) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        Musica musica = new Musica();
+
+        musica = new Musica();
         musica.play("src/music/gameover.wav");
         this.setTitle("Game Over");
         int screenWidth =  getScreenWidth();
@@ -59,6 +60,16 @@ public class GameOver extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(restartButton);
         this.add(buttonPanel, BorderLayout.SOUTH);
+
+
+    }
+    @Override
+    public void dispose() {
+        // Para a música quando a tela é fechada
+        if (musica != null) {
+            musica.stop();
+        }
+        super.dispose(); // Chama o método dispose da superclasse
     }
 
 }

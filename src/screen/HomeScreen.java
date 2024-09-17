@@ -13,11 +13,13 @@ import java.io.IOException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
 import static utils.ScreenUtils.getScreenHeight;
 import static utils.ScreenUtils.getScreenWidth;
 
 public class HomeScreen extends JFrame {
     private final Musica musica; // Referência para a instância de Musica
+
 
     public HomeScreen() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
@@ -27,8 +29,8 @@ public class HomeScreen extends JFrame {
 
         // Dimensões da janela
         setTitle("Snake Game - Tela Inicial");
-        int screenWidth = 1080 ; // Ou coloca getScreenWidth()
-        int screenHeight = 760 ; // Ou coloca getScreenHeight()
+        int screenWidth = 1080; // Ou coloca getScreenWidth()
+        int screenHeight = 720 ; // Ou coloca getScreenHeight()
 
         setSize(screenWidth, screenHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

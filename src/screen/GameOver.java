@@ -20,8 +20,8 @@ public class GameOver extends JFrame {
         musica = new Musica();
         musica.play("src/music/gameover.wav");
         this.setTitle("Game Over");
-        int screenWidth =  getScreenWidth();
-        int screenHeight =  getScreenHeight();
+        int screenWidth =  1080; //ou getScreenWidth();
+        int screenHeight =  720; //ou getScreenHeight();
         setSize(screenWidth,screenHeight);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

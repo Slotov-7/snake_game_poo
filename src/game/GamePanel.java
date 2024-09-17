@@ -17,8 +17,8 @@ import static utils.ScreenUtils.getScreenWidth;
 
 public class GamePanel extends JPanel implements ActionListener  {
 
-    public static final int SCREEN_WIDTH =  getScreenWidth();
-    public static final int SCREEN_HEIGHT = (int) (getScreenHeight() * 0.90);
+    public static final int SCREEN_WIDTH = 1080; // ou getScreenWidth();
+    public static final int SCREEN_HEIGHT = 720; // ou (getScreenHeight();
     public static final int UNIT_SIZE = 30;
     public static final int INITIAL_DELAY = 85;
     public static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;;
@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements ActionListener  {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         snake = new Snake(GAME_UNITS, bodyParts);
         food = new Food(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE);
-        this.setBackground(Color.white);
+        this.setBackground(new Color(230, 229, 229));
         this.setFocusable(true);
         this.addKeyListener(new KeyAdapter() {
             @Override

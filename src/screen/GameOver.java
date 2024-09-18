@@ -10,13 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static utils.ScreenUtils.getScreenHeight;
-import static utils.ScreenUtils.getScreenWidth;
-
 public class GameOver extends JFrame {
     private final Musica musica;
     public GameOver(int score) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-
+        // Toca a música de game over
         musica = new Musica();
         musica.play("src/music/gameover.wav");
         this.setTitle("Game Over");
@@ -28,7 +25,7 @@ public class GameOver extends JFrame {
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
-        JLabel scoreLabel = new JLabel("Scoreboard: " + score, SwingConstants.CENTER);
+        JLabel scoreLabel = new JLabel("Scoreboard: " + score, SwingConstants.CENTER);//mostra a pontuação
         scoreLabel.setFont(new Font("Ink Free", Font.BOLD, 40));
         scoreLabel.setForeground(Color.RED);
         this.add(scoreLabel, BorderLayout.NORTH);
@@ -38,31 +35,33 @@ public class GameOver extends JFrame {
         gameOverLabel.setForeground(Color.RED);
         this.add(gameOverLabel, BorderLayout.CENTER);
 
-        JButton restartButton = new JButton("Restart game");
+        JPanel buttonPanel = jPanel(screenWidth, screenHeight);
+        this.add(buttonPanel, BorderLayout.SOUTH);
+    }
+    private JPanel jPanel(int screenWidth, int screenHeight) {
+        JButton restartButton = new JButton("Restart game"); //botão para reiniciar o jogo
         restartButton.setFont(new Font("Ink Free", Font.BOLD, 30));
         restartButton.setFocusPainted(false);
         restartButton.setBorderPainted(false);
         restartButton.setContentAreaFilled(false);
         restartButton.setOpaque(false);
-        restartButton.setBounds((screenWidth - 300) / 2, screenHeight / 2 + 50, 300, 40);;
+        restartButton.setBounds((screenWidth - 300) / 2, screenHeight / 2 + 50, 300, 40);
         restartButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {//volta a tela inicial
                 dispose();
                 try {
                     new HomeScreen().setVisible(true);
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
                     throw new RuntimeException(ex);
                 }
-
             }
         });
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(restartButton);
-        this.add(buttonPanel, BorderLayout.SOUTH);
-
-
+        return buttonPanel;
     }
+
     @Override
     public void dispose() {
         // Para a música quando a tela é fechada

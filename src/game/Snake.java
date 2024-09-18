@@ -55,7 +55,7 @@ public class Snake {
         return foodsEaten;
     }
 
-    public void setDirection(char direction) {
+    public void setDirection(char direction) { // impede a cobra de andar na direção oposta
         if (this.direction == 'U' && direction != 'D' ||
                 this.direction == 'D' && direction != 'U' ||
                 this.direction == 'L' && direction != 'R' ||
@@ -64,7 +64,7 @@ public class Snake {
         }
     }
 
-    public void handleKeyPress(int keyCode) {
+    public void handleKeyPress(int keyCode) {//muda a direção da cobra com as teclas de seta e WASD
         switch (keyCode) {
             case KeyEvent.VK_LEFT, KeyEvent.VK_A -> setDirection('L');
             case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> setDirection('R');
@@ -85,7 +85,7 @@ public class Snake {
         return bodyParts;
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g) {//desenha a cobra
         for (int i = 0; i < bodyParts; i++) {
             if (i == 0) {
                 g.setColor(Color.green);

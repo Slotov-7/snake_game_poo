@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements ActionListener  {
         startGame();
     }
 
-    public void startGame() {
+    public void startGame() {//inicia o jogo
         running = true;
         DELAY = 85;
         timer = new Timer(DELAY, this);
@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements ActionListener  {
         }
     }
 
-    public void checkFood() {
+    public void checkFood() { // verifica se a cobra comeu a comida
         if (snake.getX()[0] == food.getFoodX() && snake.getY()[0] == food.getFoodY()) {
             snake.grow();
             food.generateFood();
@@ -91,14 +91,14 @@ public class GamePanel extends JPanel implements ActionListener  {
         }
     }
 
-    public void checkCollisions() {
+    public void checkCollisions() { // verifica se a cobra colidiu com ela mesma ou com as bordas
         if (snake.checkCollision() || snake.checkOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
             timer.stop();
             running = false;
         }
     }
 
-    public void gameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void gameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException {//finaliza o jogo e mostra a tela de game over
         musica.stop();
         frame.dispose();
         new GameOver(snake.getFoodsEaten()).setVisible(true);

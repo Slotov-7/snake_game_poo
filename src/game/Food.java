@@ -20,20 +20,20 @@ public class Food {
         generateFood();
     }
 
-    public void generateFood() {
+    public void generateFood() { // gera a comida em uma posição e cor aleatória
         foodX = random.nextInt(screenWidth / unitSize) * unitSize;
         foodY = random.nextInt(screenHeight / unitSize) * unitSize;
         foodColor = randomColor();
     }
 
-    private Color randomColor() {
+    private Color randomColor() { // gera uma cor aleatória
         int r = random.nextInt(255);
         int g = random.nextInt(255);
         int b = random.nextInt(255);
         return new Color(r, g, b);
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g) { // desenha a comida
         g.setColor(foodColor);
         g.fillOval(foodX, foodY, unitSize, unitSize);
     }

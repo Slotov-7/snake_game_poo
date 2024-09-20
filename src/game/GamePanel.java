@@ -46,8 +46,12 @@ public class GamePanel extends JPanel implements ActionListener {
                 snake.handleKeyPress(e.getKeyCode());
             }
         });
-        musica.play("src/music/game.wav");
-        startGame();
+        try {
+            musica.play("src/music/game.wav");
+            startGame();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            throw new GameException("Error during the game initialization: " + e.getMessage());
+        }
     }
 
     private Food generateFood() {
@@ -59,7 +63,7 @@ public class GamePanel extends JPanel implements ActionListener {
             case 3, 4, 5 -> new Banana(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 3 opções para Banana
             case  6 -> new SuperApple(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 1 opção para SuperMaçã
             case  7 -> new SuperBanana(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 1 opção para SuperBanana
-            default -> throw new IllegalStateException("Unexpected value: " + type);
+            default -> throw new GameException("Unexpected value: " + type);
         };
     }
 
@@ -72,29 +76,38 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        draw(g);
+    }
+
+    public void draw(Graphics g) {
         try {
-            draw(g);
+            Font pixelFont = TextFont.getPixelFont(32f);
+
+            if (running) {
+                // Desenha a comida
+                food.draw(g);
+
+                // Desenha a cobra
+                snake.draw(g);
+
+                // Exibe o placar
+                g.setColor(Color.BLACK);
+                g.setFont(pixelFont);
+                FontMetrics metrics = getFontMetrics(g.getFont());
+                String scoreText = "Scoreboard: " + snake.getFoodsEaten();
+                g.drawString(scoreText,
+                        (SCREEN_WIDTH - metrics.stringWidth(scoreText)) / 2,
+                        g.getFont().getSize() + 15);
+            } else {
+                gameOver(); // Se o jogo terminou, chama o método de game over
+            }
+
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            throw new RuntimeException(e);
+            // Lança uma GameException para tratar o erro
+            throw new GameException("Error during the game drawing: " + e.getMessage());
         }
     }
 
-    public void draw(Graphics g) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        Font pixelFont = TextFont.getPixelFont(32f);
-        if (running) {
-            food.draw(g);
-            snake.draw(g);
-
-            g.setColor(Color.BLACK);
-            g.setFont(pixelFont);
-            FontMetrics metrics = getFontMetrics(g.getFont());
-            g.drawString("\n"+ "Scoreboard: " + snake.getFoodsEaten(),
-                    (SCREEN_WIDTH - metrics.stringWidth("Scoreboard: " + snake.getFoodsEaten() + "!")) / 2,
-                    g.getFont().getSize() + 15);
-        } else {
-            gameOver();
-        }
-    }
 
     public void checkFood() {
         if (snake.getX()[0] == food.getFoodX() && snake.getY()[0] == food.getFoodY()) {

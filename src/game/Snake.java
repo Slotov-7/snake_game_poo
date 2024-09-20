@@ -32,11 +32,15 @@ public class Snake {
             y[i] = y[i - 1];
         }
 
-        switch (direction) {
-            case 'U' -> y[0] = y[0] - UNIT_SIZE;
-            case 'D' -> y[0] = y[0] + UNIT_SIZE;
-            case 'L' -> x[0] = x[0] - UNIT_SIZE;
-            case 'R' -> x[0] = x[0] + UNIT_SIZE;
+        try {
+            switch (direction) {
+                case 'U' -> y[0] = y[0] - UNIT_SIZE;
+                case 'D' -> y[0] = y[0] + UNIT_SIZE;
+                case 'L' -> x[0] = x[0] - UNIT_SIZE;
+                case 'R' -> x[0] = x[0] + UNIT_SIZE;
+            }
+        } catch (GameException e){
+            System.out.println(e.getMessage());
         }
     }
 

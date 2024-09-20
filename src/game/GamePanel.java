@@ -2,11 +2,9 @@ package game;
 
 import music.Musica;
 import screen.GameOver;
-import game.comida.Food;
-import game.comida.Banana;
-import game.comida.Maca;
-import game.comida.SuperBanana;
-import game.comida.SuperMaca;
+import game.food.Food;
+import game.food.Banana;
+import game.food.SuperBanana;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -19,9 +17,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Random;
 
-import static utils.ScreenUtils.getScreenHeight;
-import static utils.ScreenUtils.getScreenWidth;
-
 public class GamePanel extends JPanel implements ActionListener {
 
     public static final int SCREEN_WIDTH = 1080; 
@@ -33,7 +28,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer timer;
     private final JFrame frame;
     private final Snake snake;
-    private Food food; 
+    private Food food;
     public boolean running = false;
     private int DELAY = INITIAL_DELAY;
     private final Musica musica;
@@ -61,9 +56,9 @@ public class GamePanel extends JPanel implements ActionListener {
         int tipo = random.nextInt(6); // Atualizado para considerar 6 tipos
     
         return switch (tipo) {
-            case 0, 1, 2 -> new Maca(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 3 opções para Maçã
+            case 0, 1, 2 -> new game.food.Apple(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 3 opções para Maçã
             case 3, 4, 5 -> new Banana(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 3 opções para Banana
-            case  6 -> new SuperMaca(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 1 opção para SuperMaçã
+            case  6 -> new game.food.SuperApple(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 1 opção para SuperMaçã
             case  7 -> new SuperBanana(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 1 opção para SuperBanana
             default -> throw new IllegalStateException("Unexpected value: " + tipo);
         };
@@ -103,7 +98,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void checkFood() {
         if (snake.getX()[0] == food.getFoodX() && snake.getY()[0] == food.getFoodY()) {
-            food.aplicarEfeito(snake); 
+            food.applyEffect(snake);
             snake.grow();
             food = gerarComida();
             DELAY = snake.getDelay();

@@ -1,4 +1,4 @@
-package game.comida;
+package game.food;
 
 import game.Snake;
 import java.awt.Color;
@@ -8,17 +8,18 @@ public class SuperBanana extends Banana {
 
     public SuperBanana(int screenWidth, int screenHeight, int unitSize) {
         super(screenWidth, screenHeight, unitSize);
-        this.foodColor = setColor(); 
-
-    @Override
-    public Color setColor() {
-        return Color.YELLOW; 
+        this.foodColor = setColor();  // Corrigido o erro de sintaxe
     }
 
     @Override
-    public void aplicarEfeito(Snake cobra) {
+    public Color setColor() {
+        return Color.YELLOW;
+    }
+
+    @Override
+    public void applyEffect(Snake snake) {
         int aumentoVelocidade = 20;
-        cobra.setDelay(cobra.getDelay() + aumentoVelocidade);
+        snake.setDelay(snake.getDelay() + aumentoVelocidade);
     }
 
     @Override

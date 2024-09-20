@@ -1,4 +1,4 @@
-package game.comida;
+package game.food;
 
 import java.awt.*;
 import java.util.Random;
@@ -29,7 +29,7 @@ public abstract class Food {
 
     protected abstract Color setColor(); 
 
-    public abstract void aplicarEfeito(Snake snake);
+    public abstract void applyEffect(Snake snake);
 
     public void draw(Graphics g) { 
         g.setColor(setColor());

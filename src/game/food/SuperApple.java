@@ -1,12 +1,12 @@
-package game.comida;
+package game.food;
 
 import game.Snake;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class SuperMaca extends Maca {
+public class SuperApple extends Apple {
 
-    public SuperMaca(int screenWidth, int screenHeight, int unitSize) {
+    public SuperApple(int screenWidth, int screenHeight, int unitSize) {
         super(screenWidth, screenHeight, unitSize);
         this.foodColor = setColor();
     }
@@ -17,7 +17,7 @@ public class SuperMaca extends Maca {
     }
 
     @Override
-    public void aplicarEfeito(Snake snake) {
+    public void applyEffect(Snake snake) {
         snake.maisPartes();
         snake.maisPartes();
     }

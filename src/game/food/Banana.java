@@ -1,4 +1,4 @@
-package game.comida;
+package game.food;
 
 import game.Snake;
 import java.awt.Color;
@@ -17,7 +17,7 @@ public class Banana extends Food {
     }
 
     @Override
-    public void aplicarEfeito(Snake snake) {
+    public void applyEffect(Snake snake) {
         int aumentoVelocidade = 10; 
         snake.setDelay(snake.getDelay() + aumentoVelocidade);
     }

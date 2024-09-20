@@ -12,14 +12,9 @@ public class SuperBanana extends Banana {
     }
 
     @Override
-    public Color setColor() {
-        return Color.YELLOW;
-    }
-
-    @Override
     public void applyEffect(Snake snake) {
-        int aumentoVelocidade = 20;
-        snake.setDelay(snake.getDelay() + aumentoVelocidade);
+        int increaseSpeed = 20;
+        snake.setDelay(snake.getDelay() + increaseSpeed);
     }
 
     @Override

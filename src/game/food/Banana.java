@@ -18,12 +18,7 @@ public class Banana extends Food {
 
     @Override
     public void applyEffect(Snake snake) {
-        int aumentoVelocidade = 10; 
-        snake.setDelay(snake.getDelay() + aumentoVelocidade);
-    }
-
-
-    public int getAumentoVelocidade() {
-        return 10;
+        int increaseSpeed = 10;
+        snake.setDelay(snake.getDelay() + increaseSpeed);
     }
 }

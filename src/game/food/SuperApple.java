@@ -12,14 +12,9 @@ public class SuperApple extends Apple {
     }
 
     @Override
-    public Color setColor() {
-        return Color.RED;
-    }
-
-    @Override
     public void applyEffect(Snake snake) {
-        snake.maisPartes();
-        snake.maisPartes();
+        snake.moreParts();
+        snake.moreParts();
     }
 
     @Override

@@ -9,14 +9,11 @@ public class Apple extends Food {
         super(screenWidth, screenHeight, unitSize);
         this.foodColor = setColor();
     }
-
-    @Override
     public Color setColor() {
         return Color.RED;
     }
-
     @Override
     public void applyEffect(Snake snake) {
-        snake.maisPartes();
+        snake.moreParts();
     }
 }

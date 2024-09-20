@@ -53,9 +53,10 @@ public class Snake {
         foodsEaten++;
     }
 
-    public void maisPartes() {
+    public void moreParts() {
         bodyParts ++;
     }
+
 
     public int getFoodsEaten() {
         return foodsEaten;
@@ -85,10 +86,6 @@ public class Snake {
 
     public int[] getY() {
         return y;
-    }
-
-    public int getBodyParts() {
-        return bodyParts;
     }
 
     public int getDelay() {

@@ -24,10 +24,9 @@ public abstract class Food {
     public void generateFood() { 
         foodX = random.nextInt(screenWidth / unitSize) * unitSize;
         foodY = random.nextInt(screenHeight / unitSize) * unitSize;
-  
     }
 
-    protected abstract Color setColor(); 
+    public abstract Color setColor();
 
     public abstract void applyEffect(Snake snake);
 

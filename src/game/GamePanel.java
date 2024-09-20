@@ -1,10 +1,8 @@
 package game;
 
+import game.food.*;
 import music.Musica;
 import screen.GameOver;
-import game.food.Food;
-import game.food.Banana;
-import game.food.SuperBanana;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -38,7 +36,7 @@ public class GamePanel extends JPanel implements ActionListener {
         this.musica = new Musica();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         snake = new Snake(GAME_UNITS, BODY_PARTS);
-        food = gerarComida(); 
+        food = generateFood();
         this.setBackground(new Color(230, 229, 229));
         this.setFocusable(true);
         this.addKeyListener(new KeyAdapter() {
@@ -51,16 +49,16 @@ public class GamePanel extends JPanel implements ActionListener {
         startGame();
     }
 
-    private Food gerarComida() {
+    private Food generateFood() {
         Random random = new Random();
-        int tipo = random.nextInt(6); // Atualizado para considerar 6 tipos
+        int type = random.nextInt(8); // Atualizado para considerar 6 tipos
     
-        return switch (tipo) {
-            case 0, 1, 2 -> new game.food.Apple(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 3 opções para Maçã
+        return switch (type) {
+            case 0, 1, 2 -> new Apple(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 3 opções para Maçã
             case 3, 4, 5 -> new Banana(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 3 opções para Banana
-            case  6 -> new game.food.SuperApple(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 1 opção para SuperMaçã
+            case  6 -> new SuperApple(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 1 opção para SuperMaçã
             case  7 -> new SuperBanana(SCREEN_WIDTH, SCREEN_HEIGHT, UNIT_SIZE); // 1 opção para SuperBanana
-            default -> throw new IllegalStateException("Unexpected value: " + tipo);
+            default -> throw new IllegalStateException("Unexpected value: " + type);
         };
     }
 
@@ -98,9 +96,24 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void checkFood() {
         if (snake.getX()[0] == food.getFoodX() && snake.getY()[0] == food.getFoodY()) {
+
+            if (food instanceof SuperApple) {
+                // Aplicar o efeito da SuperApple
+                System.out.println("A cobra comeu uma super maçã!");
+            } else if (food instanceof SuperBanana) {
+                // Aplicar o efeito da SuperBanana
+                System.out.println("A cobra comeu uma super banana!");
+            } else if (food instanceof Apple) {
+                // Aplicar o efeito da Apple
+                System.out.println("A cobra comeu uma maçã!");
+            } else if (food instanceof Banana) {
+                // Aplicar o efeito da Banana
+                System.out.println("A cobra comeu uma banana!");
+            }
+            snake.updateFoodsEaten(food);
             food.applyEffect(snake);
             snake.grow();
-            food = gerarComida();
+            food = generateFood();
             DELAY = snake.getDelay();
             timer.setDelay(DELAY);
         }

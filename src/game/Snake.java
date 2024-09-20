@@ -1,7 +1,10 @@
 package game;
 
+import game.food.*;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import javax.swing.Timer;
 
 public class Snake {
     private static final int UNIT_SIZE = 30;
@@ -10,7 +13,8 @@ public class Snake {
     private int bodyParts;
     private int foodsEaten;
     private char direction;
-    private int delay;  
+    private static int DELAY = 85;
+
 
     public Snake(int gameUnits, int initialBodyParts) {
         x = new int[gameUnits];
@@ -18,7 +22,8 @@ public class Snake {
         bodyParts = initialBodyParts;
         foodsEaten = 0;
         direction = 'D';
-        delay = 85; 
+        DELAY = 85;
+
     }
 
     public void move() {
@@ -50,13 +55,19 @@ public class Snake {
 
     public void grow() {
         bodyParts++;
-        foodsEaten++;
+
     }
 
     public void moreParts() {
         bodyParts ++;
     }
-
+    public void updateFoodsEaten(Food food) {
+        if (food instanceof SuperApple || food instanceof SuperBanana) {
+            foodsEaten += 2;
+        } else if(food instanceof Apple || food instanceof Banana) {
+            foodsEaten++;
+        }
+    }
 
     public int getFoodsEaten() {
         return foodsEaten;
@@ -80,6 +91,7 @@ public class Snake {
         }
     }
 
+
     public int[] getX() {
         return x;
     }
@@ -89,11 +101,11 @@ public class Snake {
     }
 
     public int getDelay() {
-        return delay;
+        return DELAY;
     }
 
     public void setDelay(int delay) {
-        this.delay = delay;
+        DELAY = delay;
     }
 
     public void draw(Graphics g) {
@@ -106,5 +118,7 @@ public class Snake {
             g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
         }
     }
+
+
 }
 

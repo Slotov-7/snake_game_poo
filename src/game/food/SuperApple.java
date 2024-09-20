@@ -1,7 +1,6 @@
 package game.food;
 
 import game.Snake;
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class SuperApple extends Apple {
@@ -10,10 +9,14 @@ public class SuperApple extends Apple {
         super(screenWidth, screenHeight, unitSize);
         this.foodColor = setColor();
     }
-
+    @Override
+    public void increaseSpeed(Snake snake){
+        int DELAY = (int) Math.max((85 - 45 * (1 - Math.exp(-snake.getFoodsEaten() / 10.0))), 35);
+        snake.setDelay(DELAY);
+    }
     @Override
     public void applyEffect(Snake snake) {
-        snake.moreParts();
+        super.applyEffect(snake);
         snake.moreParts();
     }
 

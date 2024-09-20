@@ -10,11 +10,15 @@ public class SuperBanana extends Banana {
         super(screenWidth, screenHeight, unitSize);
         this.foodColor = setColor();  // Corrigido o erro de sintaxe
     }
-
+    @Override
+    public void increaseSpeed(Snake snake){
+        int DELAY = (int) Math.max((85 - 40 * (1 - Math.exp(-snake.getFoodsEaten() / 10.0))), 35);
+        snake.setDelay(DELAY);
+    }
     @Override
     public void applyEffect(Snake snake) {
-        int increaseSpeed = 20;
-        snake.setDelay(snake.getDelay() + increaseSpeed);
+        snake.moreParts();
+        snake.moreParts();
     }
 
     @Override

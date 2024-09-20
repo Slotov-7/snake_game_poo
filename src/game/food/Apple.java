@@ -15,5 +15,6 @@ public class Apple extends Food {
     @Override
     public void applyEffect(Snake snake) {
         snake.moreParts();
+        increaseSpeed(snake);
     }
 }

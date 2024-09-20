@@ -12,7 +12,7 @@ public class SuperBanana extends Banana {
     }
     @Override
     public void increaseSpeed(Snake snake){
-        int DELAY = (int) Math.max((85 - 40 * (1 - Math.exp(-snake.getFoodsEaten() / 10.0))), 35);
+        int DELAY = (int) Math.max((85 - 35 * (1 - Math.exp(-snake.getFoodsEaten() / 10.0))), 35);
         snake.setDelay(DELAY);
     }
     @Override

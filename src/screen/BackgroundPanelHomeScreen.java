@@ -3,10 +3,10 @@ package screen;
 import javax.swing.*;
 import java.awt.*;
 
-public class BackgroundPanel extends JPanel {
+public class BackgroundPanelHomeScreen extends JPanel {
     private final Image backgroundImage;
 
-    public BackgroundPanel() {
+    public BackgroundPanelHomeScreen() {
         // Carrega a imagem de fundo
         backgroundImage = new ImageIcon("src/assets/snakeBG.jpg").getImage();
     }

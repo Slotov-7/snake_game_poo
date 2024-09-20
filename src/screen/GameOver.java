@@ -1,4 +1,5 @@
 package screen;
+import game.GameFrame;
 import music.Musica;
 
 
@@ -12,55 +13,109 @@ import java.io.IOException;
 
 public class GameOver extends JFrame {
     private final Musica musica;
+
     public GameOver(int score) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // Toca a música de game over
         musica = new Musica();
         musica.play("src/music/gameover.wav");
+
+        // Configurações da janela
         this.setTitle("Game Over");
         int screenWidth =  1080; //ou getScreenWidth();
         int screenHeight =  720; //ou getScreenHeight();
-        setSize(screenWidth,screenHeight);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        setSize(screenWidth,screenHeight);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Painel principal com a imagem de fundo
+        BackgroundPanelGameOverScreen backgroundPanel = new BackgroundPanelGameOverScreen();
+        backgroundPanel.setLayout(new BorderLayout());
         this.setLayout(new BorderLayout());
 
-        JLabel scoreLabel = new JLabel("Scoreboard: " + score, SwingConstants.CENTER);//mostra a pontuação
-        scoreLabel.setFont(new Font("Ink Free", Font.BOLD, 40));
-        scoreLabel.setForeground(Color.RED);
-        this.add(scoreLabel, BorderLayout.NORTH);
+        // Painel para o Scoreboard, transparente
+        JPanel scorePanel = new JPanel();
+        scorePanel.setOpaque(false); // Tornar o painel transparente
+        scorePanel.setLayout(new FlowLayout());
 
-        JLabel gameOverLabel = new JLabel("Game Over", SwingConstants.CENTER);
-        gameOverLabel.setFont(new Font("Ink Free", Font.BOLD, 75));
-        gameOverLabel.setForeground(Color.RED);
-        this.add(gameOverLabel, BorderLayout.CENTER);
+        JLabel scoreLabel = new JLabel("Your score: " + score, SwingConstants.CENTER);
+        scoreLabel.setFont(new Font("Serif", Font.PLAIN, 40));
+        scoreLabel.setForeground(Color.WHITE);
+        scorePanel.add(scoreLabel);
 
-        JPanel buttonPanel = jPanel(screenWidth, screenHeight);
+        backgroundPanel.add(scorePanel, BorderLayout.NORTH);
+
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(50, 50, 50, 0));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         this.add(buttonPanel, BorderLayout.SOUTH);
-    }
-    private JPanel jPanel(int screenWidth, int screenHeight) {
+
+        JButton homeScreenButton = new JButton("Home Screen"); //botão para reiniciar o jogo
+
+        homeScreenButton.setFont(new Font("Serif", Font.PLAIN, 48));
+        homeScreenButton.setForeground(Color.WHITE);
+        homeScreenButton.setBackground(new Color(110, 7, 35));
+        homeScreenButton.setFocusPainted(false);
+        homeScreenButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        homeScreenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {//volta a tela inicial
+                dispose();
+                try {
+                    new HomeScreen().setVisible(true);  // Abre o jogo
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         JButton restartButton = new JButton("Restart game"); //botão para reiniciar o jogo
-        restartButton.setFont(new Font("Ink Free", Font.BOLD, 30));
+
+        restartButton.setFont(new Font("Serif", Font.PLAIN, 48));
+        restartButton.setForeground(Color.WHITE);
+        restartButton.setBackground(new Color(9, 149, 232));
         restartButton.setFocusPainted(false);
-        restartButton.setBorderPainted(false);
-        restartButton.setContentAreaFilled(false);
-        restartButton.setOpaque(false);
-        restartButton.setBounds((screenWidth - 300) / 2, screenHeight / 2 + 50, 300, 40);
+        restartButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         restartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {//volta a tela inicial
                 dispose();
                 try {
-                    new HomeScreen().setVisible(true);
-                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                    new GameFrame().setVisible(true);  // Abre o jogo
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
         });
-        JPanel buttonPanel = new JPanel();
+        JButton exitButton = new JButton("Exit");
+        exitButton.setFont(new Font("Serif", Font.PLAIN, 48));
+        exitButton.setForeground(Color.WHITE);
+        exitButton.setBackground(new Color(255, 69, 0));
+        exitButton.setFocusPainted(false);
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Ação do botão "Sair"
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);  // Fecha o programa
+            }
+        });
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
+        buttonPanel.add(homeScreenButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento superior
         buttonPanel.add(restartButton);
-        return buttonPanel;
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
+        buttonPanel.add(exitButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
+
+        backgroundPanel.add(buttonPanel, BorderLayout.SOUTH);
+        add(backgroundPanel);
     }
+
 
     @Override
     public void dispose() {

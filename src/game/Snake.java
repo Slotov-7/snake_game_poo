@@ -10,6 +10,7 @@ public class Snake {
     private int bodyParts;
     private int foodsEaten;
     private char direction;
+    private int velocidade;  // Nova variável para controlar a velocidade
 
     public Snake(int gameUnits, int initialBodyParts) {
         x = new int[gameUnits];
@@ -17,6 +18,7 @@ public class Snake {
         bodyParts = initialBodyParts;
         foodsEaten = 0;
         direction = 'D';
+        velocidade = 1;  // Velocidade inicial padrão
     }
 
     public void move() {
@@ -26,10 +28,10 @@ public class Snake {
         }
 
         switch (direction) {
-            case 'U' -> y[0] = y[0] - UNIT_SIZE;
-            case 'D' -> y[0] = y[0] + UNIT_SIZE;
-            case 'L' -> x[0] = x[0] - UNIT_SIZE;
-            case 'R' -> x[0] = x[0] + UNIT_SIZE;
+            case 'U' -> y[0] = y[0] - UNIT_SIZE * velocidade;
+            case 'D' -> y[0] = y[0] + UNIT_SIZE * velocidade;
+            case 'L' -> x[0] = x[0] - UNIT_SIZE * velocidade;
+            case 'R' -> x[0] = x[0] + UNIT_SIZE * velocidade;
         }
     }
 
@@ -51,11 +53,19 @@ public class Snake {
         foodsEaten++;
     }
 
+    public void maisPartes() {  // Método para dobrar as partes do corpo
+        bodyParts += 2;
+    }
+
+    public void maisVelocidade() {  // Método para dobrar a velocidade
+        velocidade = velocidade + velocidade/10;
+    }
+
     public int getFoodsEaten() {
         return foodsEaten;
     }
 
-    public void setDirection(char direction) { // impede a cobra de andar na direção oposta
+    public void setDirection(char direction) {
         if (this.direction == 'U' && direction != 'D' ||
                 this.direction == 'D' && direction != 'U' ||
                 this.direction == 'L' && direction != 'R' ||
@@ -64,7 +74,7 @@ public class Snake {
         }
     }
 
-    public void handleKeyPress(int keyCode) {//muda a direção da cobra com as teclas de seta e WASD
+    public void handleKeyPress(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_LEFT, KeyEvent.VK_A -> setDirection('L');
             case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> setDirection('R');
@@ -85,7 +95,11 @@ public class Snake {
         return bodyParts;
     }
 
-    public void draw(Graphics g) {//desenha a cobra
+    public int getVelocidade() {
+        return velocidade;
+    }
+
+    public void draw(Graphics g) {
         for (int i = 0; i < bodyParts; i++) {
             if (i == 0) {
                 g.setColor(Color.green);

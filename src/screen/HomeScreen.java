@@ -2,6 +2,7 @@ package screen;
 
 import game.GameFrame;
 import music.Musica;
+import utils.TextFont;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -15,13 +16,13 @@ public class HomeScreen extends JFrame {
     private final Musica musica; // Referência para a instância de Musica
 
     public HomeScreen() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-
+        Font pixelFont = TextFont.getPixelFont(32f);
         // Inicializa a música
         musica = new Musica(); // Inicializa a música
         musica.play("src/music/homescreen.wav"); // Toca a música da tela inicial
 
         // Dimensões da janela
-        setTitle("Snake Game - Tela Inicial");
+        setTitle("SNAKE GAME - HOME SCREEN");
         int screenWidth = 1080; // Ou coloca getScreenWidth()
         int screenHeight = 720 ; // Ou coloca getScreenHeight()
 
@@ -40,8 +41,8 @@ public class HomeScreen extends JFrame {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS)); // Alinha na vertical
 
 
-        JButton playButton = new JButton("play");
-        playButton.setFont(new Font("Serif", Font.PLAIN, 48));
+        JButton playButton = new JButton("Play");
+        playButton.setFont(pixelFont);
         playButton.setForeground(Color.WHITE);
         playButton.setBackground(new Color(30, 144, 255));  // Azul
         playButton.setFocusPainted(false);
@@ -62,8 +63,8 @@ public class HomeScreen extends JFrame {
         });
 
         // Botão "Créditos"
-        JButton creditButton = new JButton("credits");
-        creditButton.setFont(new Font("Serif", Font.PLAIN, 48));
+        JButton creditButton = new JButton("Credits");
+        creditButton.setFont(pixelFont);
         creditButton.setForeground(Color.WHITE);
         creditButton.setBackground(new Color(203, 161, 36));
         creditButton.setFocusPainted(false);
@@ -78,8 +79,8 @@ public class HomeScreen extends JFrame {
         });
 
         // Botão "Sair"
-        JButton exitButton = new JButton("EXIT");
-        exitButton.setFont(new Font("DialogInput", Font.PLAIN, 48));
+        JButton exitButton = new JButton("Exit");
+        exitButton.setFont(pixelFont);
         exitButton.setForeground(Color.WHITE);
         exitButton.setBackground(new Color(255, 69, 0));
         exitButton.setFocusPainted(false);

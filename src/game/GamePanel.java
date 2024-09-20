@@ -3,6 +3,7 @@ package game;
 import game.food.*;
 import music.Musica;
 import screen.GameOver;
+import utils.TextFont;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -79,16 +80,17 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void draw(Graphics g) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        Font pixelFont = TextFont.getPixelFont(32f);
         if (running) {
             food.draw(g);
             snake.draw(g);
 
-            g.setColor(Color.red);
-            g.setFont(new Font("Ink Free", Font.BOLD, 40));
+            g.setColor(Color.BLACK);
+            g.setFont(pixelFont);
             FontMetrics metrics = getFontMetrics(g.getFont());
-            g.drawString("scoreboard: " + snake.getFoodsEaten(),
-                    (SCREEN_WIDTH - metrics.stringWidth("scoreboard: " + snake.getFoodsEaten())) / 2,
-                    g.getFont().getSize());
+            g.drawString("\n"+ "Scoreboard: " + snake.getFoodsEaten(),
+                    (SCREEN_WIDTH - metrics.stringWidth("Scoreboard: " + snake.getFoodsEaten() + "!")) / 2,
+                    g.getFont().getSize() + 15);
         } else {
             gameOver();
         }

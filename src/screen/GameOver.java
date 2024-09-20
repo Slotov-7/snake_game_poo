@@ -1,6 +1,7 @@
 package screen;
 import game.GameFrame;
 import music.Musica;
+import utils.TextFont;
 
 
 import javax.sound.sampled.LineUnavailableException;
@@ -18,7 +19,7 @@ public class GameOver extends JFrame {
         // Toca a música de game over
         musica = new Musica();
         musica.play("src/music/gameover.wav");
-
+        Font pixelFont = TextFont.getPixelFont(32f);
         // Configurações da janela
         this.setTitle("Game Over");
         int screenWidth =  1080; //ou getScreenWidth();
@@ -39,7 +40,7 @@ public class GameOver extends JFrame {
         scorePanel.setLayout(new FlowLayout());
 
         JLabel scoreLabel = new JLabel("Your score: " + score, SwingConstants.CENTER);
-        scoreLabel.setFont(new Font("Serif", Font.PLAIN, 40));
+        scoreLabel.setFont(pixelFont);
         scoreLabel.setForeground(Color.WHITE);
         scorePanel.add(scoreLabel);
 
@@ -52,8 +53,7 @@ public class GameOver extends JFrame {
         this.add(buttonPanel, BorderLayout.SOUTH);
 
         JButton homeScreenButton = new JButton("Home Screen"); //botão para reiniciar o jogo
-
-        homeScreenButton.setFont(new Font("Serif", Font.PLAIN, 48));
+        homeScreenButton.setFont(pixelFont);
         homeScreenButton.setForeground(Color.WHITE);
         homeScreenButton.setBackground(new Color(110, 7, 35));
         homeScreenButton.setFocusPainted(false);
@@ -71,9 +71,9 @@ public class GameOver extends JFrame {
             }
         });
 
-        JButton restartButton = new JButton("Restart game"); //botão para reiniciar o jogo
+        JButton restartButton = new JButton("Restart Game"); //botão para reiniciar o jogo
 
-        restartButton.setFont(new Font("Serif", Font.PLAIN, 48));
+        restartButton.setFont(pixelFont);
         restartButton.setForeground(Color.WHITE);
         restartButton.setBackground(new Color(9, 149, 232));
         restartButton.setFocusPainted(false);
@@ -91,7 +91,7 @@ public class GameOver extends JFrame {
             }
         });
         JButton exitButton = new JButton("Exit");
-        exitButton.setFont(new Font("Serif", Font.PLAIN, 48));
+        exitButton.setFont(pixelFont);
         exitButton.setForeground(Color.WHITE);
         exitButton.setBackground(new Color(255, 69, 0));
         exitButton.setFocusPainted(false);

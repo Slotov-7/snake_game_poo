@@ -1,13 +1,14 @@
-package game.Comida;
+package game.comida;
 
 import game.Snake;
 import java.awt.Color;
+
 
 public class Banana extends Food {
 
     public Banana(int screenWidth, int screenHeight, int unitSize) {
         super(screenWidth, screenHeight, unitSize);
-        this.foodColor = setColor(); // Define a cor corretamente
+        this.foodColor = setColor(); 
     }
 
     @Override
@@ -16,9 +17,13 @@ public class Banana extends Food {
     }
 
     @Override
-    public void aplicarEfeito(Snake cobra) {
-        cobra.maisVelocidade(); // Apenas aumenta a velocidade
-        // Remova a linha abaixo
-        // cobra.grow(); 
+    public void aplicarEfeito(Snake snake) {
+        int aumentoVelocidade = 10; 
+        snake.setDelay(snake.getDelay() + aumentoVelocidade);
+    }
+
+
+    public int getAumentoVelocidade() {
+        return 10;
     }
 }

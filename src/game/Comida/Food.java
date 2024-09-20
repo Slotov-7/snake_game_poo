@@ -1,9 +1,10 @@
-package game.Comida; // Corrigido para minúsculas para seguir convenções de pacotes
+package game.comida;
 
 import java.awt.*;
 import java.util.Random;
+import game.Snake;
 
-public abstract class Food { // Tornada abstrata para ser estendida
+public abstract class Food { 
     protected int foodX;
     protected int foodY;
     protected Color foodColor;
@@ -20,17 +21,19 @@ public abstract class Food { // Tornada abstrata para ser estendida
         generateFood();
     }
 
-    public void generateFood() { // Gera a comida em uma posição específica
+    public void generateFood() { 
         foodX = random.nextInt(screenWidth / unitSize) * unitSize;
         foodY = random.nextInt(screenHeight / unitSize) * unitSize;
-        foodColor = setColor(); // Agora chamamos o método para definir a cor
+  
     }
 
-    protected abstract Color setColor(); // Método abstrato para definir a cor
+    protected abstract Color setColor(); 
 
-    public void draw(Graphics g) { // Desenha a comida
-        g.setColor(foodColor);
-        g.fillOval(foodX, foodY, unitSize, unitSize);
+    public abstract void aplicarEfeito(Snake snake);
+
+    public void draw(Graphics g) { 
+        g.setColor(setColor());
+        g.fillOval(foodX, foodY, unitSize, unitSize); 
     }
 
     public int getFoodX() {

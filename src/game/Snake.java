@@ -10,7 +10,7 @@ public class Snake {
     private int bodyParts;
     private int foodsEaten;
     private char direction;
-    private int velocidade;  // Nova variável para controlar a velocidade
+    private int delay;  
 
     public Snake(int gameUnits, int initialBodyParts) {
         x = new int[gameUnits];
@@ -18,7 +18,7 @@ public class Snake {
         bodyParts = initialBodyParts;
         foodsEaten = 0;
         direction = 'D';
-        velocidade = 1;  // Velocidade inicial padrão
+        delay = 85; 
     }
 
     public void move() {
@@ -28,10 +28,10 @@ public class Snake {
         }
 
         switch (direction) {
-            case 'U' -> y[0] = y[0] - UNIT_SIZE * velocidade;
-            case 'D' -> y[0] = y[0] + UNIT_SIZE * velocidade;
-            case 'L' -> x[0] = x[0] - UNIT_SIZE * velocidade;
-            case 'R' -> x[0] = x[0] + UNIT_SIZE * velocidade;
+            case 'U' -> y[0] = y[0] - UNIT_SIZE;
+            case 'D' -> y[0] = y[0] + UNIT_SIZE;
+            case 'L' -> x[0] = x[0] - UNIT_SIZE;
+            case 'R' -> x[0] = x[0] + UNIT_SIZE;
         }
     }
 
@@ -53,12 +53,8 @@ public class Snake {
         foodsEaten++;
     }
 
-    public void maisPartes() {  // Método para dobrar as partes do corpo
-        bodyParts += 2;
-    }
-
-    public void maisVelocidade() {  // Método para dobrar a velocidade
-        velocidade = velocidade + velocidade/10;
+    public void maisPartes() {
+        bodyParts ++;
     }
 
     public int getFoodsEaten() {
@@ -95,8 +91,12 @@ public class Snake {
         return bodyParts;
     }
 
-    public int getVelocidade() {
-        return velocidade;
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 
     public void draw(Graphics g) {
@@ -110,3 +110,4 @@ public class Snake {
         }
     }
 }
+

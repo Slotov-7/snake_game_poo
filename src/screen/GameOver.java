@@ -52,25 +52,43 @@ public class GameOver extends JFrame {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         this.add(buttonPanel, BorderLayout.SOUTH);
 
-        JButton homeScreenButton = new JButton("Home Screen"); //botão para reiniciar o jogo
-        homeScreenButton.setFont(pixelFont);
-        homeScreenButton.setForeground(Color.WHITE);
-        homeScreenButton.setBackground(new Color(110, 7, 35));
-        homeScreenButton.setFocusPainted(false);
-        homeScreenButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton homeScreenButton = homeScreenButton(pixelFont);
 
-        homeScreenButton.addActionListener(new ActionListener() {
+        JButton restartButton = restartButton(pixelFont);
+
+        JButton exitButton = exitButton(pixelFont);
+
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
+        buttonPanel.add(homeScreenButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento superior
+        buttonPanel.add(restartButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
+        buttonPanel.add(exitButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
+
+        backgroundPanel.add(buttonPanel, BorderLayout.SOUTH);
+        add(backgroundPanel);
+    }
+
+    private static JButton exitButton(Font pixelFont) {
+        JButton exitButton = new JButton("Exit");
+        exitButton.setFont(pixelFont);
+        exitButton.setForeground(Color.WHITE);
+        exitButton.setBackground(new Color(255, 69, 0));
+        exitButton.setFocusPainted(false);
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Ação do botão "Sair"
+        exitButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {//volta a tela inicial
-                dispose();
-                try {
-                    new HomeScreen().setVisible(true);  // Abre o jogo
-                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);  // Fecha o programa
             }
         });
+        return exitButton;
+    }
 
+    private JButton restartButton(Font pixelFont) {
         JButton restartButton = new JButton("Restart Game"); //botão para reiniciar o jogo
 
         restartButton.setFont(pixelFont);
@@ -90,30 +108,29 @@ public class GameOver extends JFrame {
                 }
             }
         });
-        JButton exitButton = new JButton("Exit");
-        exitButton.setFont(pixelFont);
-        exitButton.setForeground(Color.WHITE);
-        exitButton.setBackground(new Color(255, 69, 0));
-        exitButton.setFocusPainted(false);
-        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return restartButton;
+    }
 
-        // Ação do botão "Sair"
-        exitButton.addActionListener(new ActionListener() {
+    private JButton homeScreenButton(Font pixelFont) {
+        JButton homeScreenButton = new JButton("Home Screen"); //botão para reiniciar o jogo
+        homeScreenButton.setFont(pixelFont);
+        homeScreenButton.setForeground(Color.WHITE);
+        homeScreenButton.setBackground(new Color(110, 7, 35));
+        homeScreenButton.setFocusPainted(false);
+        homeScreenButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        homeScreenButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);  // Fecha o programa
+            public void actionPerformed(ActionEvent e) {//volta a tela inicial
+                dispose();
+                try {
+                    new HomeScreen().setVisible(true);  // Abre o jogo
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
-        buttonPanel.add(homeScreenButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento superior
-        buttonPanel.add(restartButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
-        buttonPanel.add(exitButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
-
-        backgroundPanel.add(buttonPanel, BorderLayout.SOUTH);
-        add(backgroundPanel);
+        return homeScreenButton;
     }
 
 

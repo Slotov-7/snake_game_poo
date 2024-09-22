@@ -21,7 +21,7 @@ public class HomeScreen extends JFrame {
         Font pixelFont = TextFont.getPixelFont(32f);
         // Inicializa a música
         musica = new Musica(); // Inicializa a música
-        musica.play("src/music/homescreen.wav"); // Toca a música da tela inicial
+        musica.play("snake_game_poo-master/src/music/homescreen.wav"); // Toca a música da tela inicial
 
         // Dimensões da janela
         setTitle("SNAKE GAME - HOME SCREEN");

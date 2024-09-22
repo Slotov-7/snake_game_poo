@@ -73,8 +73,8 @@ public class HomeScreen extends JFrame {
 
 
         // Carrega e redimensiona as imagens
-        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonSound.png"), 30, 30);
-        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonMuted.png"), 30, 30);
+        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("snake_game_poo-master/src/assets/buttonSound.png"), 30, 30);
+        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("snake_game_poo-master/src/assets/buttonMuted.png"), 30, 30);
         muteButton.setIcon(muteIcon); // Define a imagem no botão
 
         muteButton.addActionListener(new ActionListener() {
@@ -82,7 +82,7 @@ public class HomeScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (isMuted) {
                     try {
-                        musica.play("src/music/homescreen.wav"); // Retoma a música
+                        musica.play("snake_game_poo-master/src/music/homescreen.wav"); // Retoma a música
                     } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                         throw new GameException("Error: " + ex);
                     }
@@ -134,7 +134,7 @@ public class HomeScreen extends JFrame {
         creditButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JLabel creditsLabel = new JLabel("<html>Developers: <br>\n <br> Allex Lemos de Souza Pinheiro<br>\n <br> Débora Diana Gonçalves dos Santos <br>\n <br> Guilherme Henrique Santos Araújo <br>\n <br> Miguel Lucas Santana Freire <br>\n <br>© 2024 - Snake Game<br> \n <br> All Rights Reserved</html>");
+                JLabel creditsLabel = new JLabel("<html>Developers: <br>\n<br> Alicia Vitoria Sousa Santos <br>\n <br> Allex Lemos de Souza Pinheiro<br>\n <br> Débora Diana Gonçalves dos Santos <br>\n <br> Guilherme Henrique Santos Araújo <br>\n <br> Miguel Lucas Santana Freire <br>\n <br> Rafael Gomes Oliveira Santos <br>\n<br>© 2024 - Snake Game<br> \n <br> All Rights Reserved</html>");
                 Font pixelFont = TextFont.getPixelFont(16f);
                 creditsLabel.setFont(pixelFont);
                 JOptionPane.showMessageDialog(null, creditsLabel, "Credits", JOptionPane.INFORMATION_MESSAGE);

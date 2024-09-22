@@ -82,15 +82,13 @@ public class HomeScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (isMuted) {
                     try {
-<<<<<<< HEAD
                         musica.play("src/music/homescreen.wav"); // Retoma a música
                     } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                         throw new RuntimeException(ex);
-=======
-                        musica.play("snake_game_poo-master/src/music/homescreen.wav"); // Retoma a música
-                    } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+
+                    } catch (GameException ex) {
                         throw new GameException("Error: " + ex);
->>>>>>> a0182117e9402a6b2bee7ed08a14444a347e72d3
+
                     }
                     muteButton.setIcon(muteIcon); // Muda para o ícone de mute
                 } else {

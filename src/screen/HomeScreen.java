@@ -77,11 +77,7 @@ public class HomeScreen extends JFrame {
                 if (isMuted) {
                     try {
                         musica.play("src/music/homescreen.wav"); // Retoma a música
-                    } catch (UnsupportedAudioFileException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (LineUnavailableException ex) {
+                    } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                         throw new RuntimeException(ex);
                     }
                     muteButton.setText("Mute");

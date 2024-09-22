@@ -39,7 +39,7 @@ public class GameOver extends JFrame {
         scorePanel.setOpaque(false); // Tornar o painel transparente
         scorePanel.setLayout(new FlowLayout());
 
-        JLabel scoreLabel = new JLabel("Your score: " + score, SwingConstants.CENTER);
+        JLabel scoreLabel = new JLabel("Your score: " + score + "!", SwingConstants.CENTER) ;
         scoreLabel.setFont(pixelFont);
         scoreLabel.setForeground(Color.WHITE);
         scorePanel.add(scoreLabel);

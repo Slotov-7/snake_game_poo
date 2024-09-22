@@ -18,7 +18,7 @@ public class GameOver extends JFrame {
     public GameOver(int score) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // Toca a música de game over
         musica = new Musica();
-        musica.play("snake_game_poo-master/src/music/gameover.wav");
+        musica.play("src/music/gameover.wav");
         Font pixelFont = TextFont.getPixelFont(32f);
         // Configurações da janela
         this.setTitle("Game Over");

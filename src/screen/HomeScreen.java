@@ -21,7 +21,7 @@ public class HomeScreen extends JFrame {
         Font pixelFont = TextFont.getPixelFont(32f);
         // Inicializa a música
         musica = new Musica(); // Inicializa a música
-        musica.play("snake_game_poo-master/src/music/homescreen.wav"); // Toca a música da tela inicial
+        musica.play("src/music/homescreen.wav"); // Toca a música da tela inicial
 
         // Dimensões da janela
         setTitle("SNAKE GAME - HOME SCREEN");
@@ -73,8 +73,8 @@ public class HomeScreen extends JFrame {
 
 
         // Carrega e redimensiona as imagens
-        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("snake_game_poo-master/src/assets/buttonSound.png"), 30, 30);
-        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("snake_game_poo-master/src/assets/buttonMuted.png"), 30, 30);
+        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonSound.png"), 30, 30);
+        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonMuted.png"), 30, 30);
         muteButton.setIcon(muteIcon); // Define a imagem no botão
 
         muteButton.addActionListener(new ActionListener() {

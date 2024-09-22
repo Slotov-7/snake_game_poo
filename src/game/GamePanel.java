@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements ActionListener {
             }
         });
         try {
-            musica.play("snake_game_poo-master/src/music/game.wav");
+            musica.play("src/music/game.wav");
             startGame();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             throw new GameException("Error during the game initialization: " + e.getMessage());

@@ -8,7 +8,7 @@ public class BackgroundPanelHomeScreen extends JPanel {
 
     public BackgroundPanelHomeScreen() {
         // Carrega a imagem de fundo
-        backgroundImage = new ImageIcon("snake_game_poo-master/src/assets/snakeBG.jpg").getImage();
+        backgroundImage = new ImageIcon("src/assets/snakeBG.jpg").getImage();
     }
 
     @Override

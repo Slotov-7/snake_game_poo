@@ -1,5 +1,6 @@
 package screen;
 
+import game.GameException;
 import game.GameFrame;
 import music.Musica;
 import utils.TextFont;
@@ -15,13 +16,12 @@ import java.io.IOException;
 public class HomeScreen extends JFrame {
     private final Musica musica; // Referência para a instância de Musica
     private boolean isMuted = false; // Estado do som (mutado ou não)
-    private JButton muteButton; // Botão para mutar/desmutar
 
     public HomeScreen() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         Font pixelFont = TextFont.getPixelFont(32f);
         // Inicializa a música
         musica = new Musica(); // Inicializa a música
-        musica.play("src/music/homescreen.wav"); // Toca a música da tela inicial
+        musica.play("snake_game_poo-master/src/music/homescreen.wav"); // Toca a música da tela inicial
 
         // Dimensões da janela
         setTitle("SNAKE GAME - HOME SCREEN");
@@ -44,7 +44,8 @@ public class HomeScreen extends JFrame {
         JButton playButton = jButton(pixelFont);
         JButton creditButton = creditButton(pixelFont);
         JButton exitButton = exitButton(pixelFont);
-        muteButton = muteButton(pixelFont); // Botão para mutar/desmutar
+        // Botão para mutar/desmutar
+        JButton muteButton = muteButton(pixelFont); // Botão para mutar/desmutar
 
         // Adiciona espaçamento entre os botões
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento superior
@@ -55,6 +56,7 @@ public class HomeScreen extends JFrame {
         buttonPanel.add(exitButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
         buttonPanel.add(muteButton); // Adiciona o botão de mute
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
 
         // Adiciona o painel de botões à tela principal
         backgroundPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -64,26 +66,36 @@ public class HomeScreen extends JFrame {
     }
 
     private JButton muteButton(Font pixelFont) {
-        JButton muteButton = new JButton("Mute");
-        muteButton.setFont(pixelFont);
-        muteButton.setForeground(Color.WHITE);
-        muteButton.setBackground(new Color(128, 128, 128)); // Cor cinza
+        JButton muteButton = new JButton();
+        muteButton.setBackground(new Color(248, 155, 155, 255));
         muteButton.setFocusPainted(false);
-        muteButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Centraliza o botão
+        muteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+        // Carrega e redimensiona as imagens
+        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("snake_game_poo-master/src/assets/buttonSound.png"), 30, 30);
+        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("snake_game_poo-master/src/assets/buttonMuted.png"), 30, 30);
+        muteButton.setIcon(muteIcon); // Define a imagem no botão
 
         muteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (isMuted) {
                     try {
+<<<<<<< HEAD
                         musica.play("src/music/homescreen.wav"); // Retoma a música
                     } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                         throw new RuntimeException(ex);
+=======
+                        musica.play("snake_game_poo-master/src/music/homescreen.wav"); // Retoma a música
+                    } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+                        throw new GameException("Error: " + ex);
+>>>>>>> a0182117e9402a6b2bee7ed08a14444a347e72d3
                     }
-                    muteButton.setText("Mute");
+                    muteButton.setIcon(muteIcon); // Muda para o ícone de mute
                 } else {
                     musica.stop(); // Para a música
-                    muteButton.setText("Unmute");
+                    muteButton.setIcon(unmuteIcon); // Muda para o ícone de unmute
                 }
                 isMuted = !isMuted; // Alterna o estado
             }
@@ -92,7 +104,11 @@ public class HomeScreen extends JFrame {
         return muteButton;
     }
 
-    // Restante do código para os outros botões (Play, Credits, Exit)...
+    private ImageIcon resizeImageIcon(ImageIcon icon, int width, int height) {
+        Image img = icon.getImage(); // Obtém a imagem
+        Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH); // Redimensiona
+        return new ImageIcon(newImg); // Retorna uma nova ImageIcon
+    }
 
     private JButton exitButton(Font pixelFont) {
         JButton exitButton = new JButton("Exit");
@@ -124,7 +140,7 @@ public class HomeScreen extends JFrame {
         creditButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JLabel creditsLabel = new JLabel("<html>Developers: <br>\n <br> Miguel Lucas Santana Freire<br>© 2024 - Snake Game<br>All Rights Reserved</html>");
+                JLabel creditsLabel = new JLabel("<html>Developers: <br>\n<br> Alicia Vitoria Sousa Santos <br>\n <br> Allex Lemos de Souza Pinheiro<br>\n <br> Débora Diana Gonçalves dos Santos <br>\n <br> Guilherme Henrique Santos Araújo <br>\n <br> Miguel Lucas Santana Freire <br>\n <br> Rafael Gomes Oliveira Santos <br>\n<br>© 2024 - Snake Game<br> \n <br> All Rights Reserved</html>");
                 Font pixelFont = TextFont.getPixelFont(16f);
                 creditsLabel.setFont(pixelFont);
                 JOptionPane.showMessageDialog(null, creditsLabel, "Credits", JOptionPane.INFORMATION_MESSAGE);

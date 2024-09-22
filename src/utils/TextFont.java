@@ -6,7 +6,7 @@ public class TextFont {
     public static Font getPixelFont(float size) {
         try {
             // Carrega a fonte pixelada do arquivo
-            Font pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/utils/PressStart2P.ttf"));
+            Font pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("snake_game_poo-master/src/utils/PressStart2P.ttf"));
 
             // Registra a fonte no ambiente gráfico
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

@@ -8,7 +8,7 @@ public class BackgroundPanelGameOverScreen extends JPanel {
 
     public BackgroundPanelGameOverScreen() {
         // Carrega a imagem de fundo
-        backgroundImage = new ImageIcon("src/assets/snakeGameOver.jpg").getImage();
+        backgroundImage = new ImageIcon("snake_game_poo-master/src/assets/snakeGameOver.jpg").getImage();
     }
 
     @Override

@@ -29,7 +29,7 @@ O jogo da cobrinha é um clássico dos jogos eletrônicos onde o objetivo é con
 
 2. **Entre no diretório do projeto**:
    ```bash
-   cd snake_game_poo
+   cd (o endereço de onde foi clonado o snake_game_poo)
    ```
 
 ### 2. **Compilação e Execução**

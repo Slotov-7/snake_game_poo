@@ -26,15 +26,9 @@ O jogo da cobrinha é um clássico dos jogos eletrônicos onde o objetivo é con
    ```bash
    git clone https://github.com/Slotov-7/snake_game_poo.git
    ```
-
-2. **Entre no diretório do projeto**:
-   ```bash
-   cd (o endereço de onde foi clonado o snake_game_poo)
-   ```
-
 ### 2. **Compilação e Execução**
 
-1. **Abra sua IDE, de preferência o IntelliJ, e abra o diretório onde você clonou o projeto**.
+1. **Abra sua IDE, de preferência o IntelliJ ou Eclipse, e abra o diretório onde você clonou o projeto**.
 
 2. **Execute a Classe `Game`** para iniciar o jogo.
 

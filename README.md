@@ -56,5 +56,6 @@ Este projeto foi desenvolvido com o apoio e orientação de várias pessoas. Aba
 
 -  Universidade Federal de Sergipe (UFS)
 
+## Licença
 
-   
+- MIT license

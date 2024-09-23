@@ -16,24 +16,29 @@ O jogo da cobrinha é um clássico dos jogos eletrônicos onde o objetivo é con
 ## Tecnologias Utilizadas
 
 - **Linguagem**: Java
-- **Bibliotecas**: `javax.sound.sampled` para reprodução de áudio
-- **Interface Gráfica**: Swing
+- **Bibliotecas**: `javax.sound.sampled` para reprodução de áudio, `javax.swing` para interface gráfica.
 
 ## Instruções de Execução
 
 ### 1. **Baixando e Preparando o Projeto**
 
-1. **Baixe o arquivo ZIP** contendo o código fonte do projeto a partir do link fornecido.
-2. **Extraia o conteúdo do arquivo ZIP** para um diretório de sua escolha.
+1. **Clone o repositório** usando o comando a seguir no Git Bash:
+   ```bash
+   git clone https://github.com/Slotov-7/snake_game_poo.git
+   ```
+
+2. **Entre no diretório do projeto**:
+   ```bash
+   cd snake_game_poo
+   ```
 
 ### 2. **Compilação e Execução**
 
-1. **Abra sua IDE, de preferência o Intelij, e abra o diretório onde você extraiu o arquivo ZIP**.
+1. **Abra sua IDE, de preferência o IntelliJ, e abra o diretório onde você clonou o projeto**.
 
-2. **Execute a Classe `Game`**.
+2. **Execute a Classe `Game`** para iniciar o jogo.
 
-### 3. Músicas
-1. **Certifique-se de que os arquivos de música estejam localizados no diretório `src/music/`. Se algum arquivo estiver faltando, o jogo ainda funcionará, mas sem áudio.**
+---
 
 # Créditos
 
@@ -57,8 +62,5 @@ Este projeto foi desenvolvido com o apoio e orientação de várias pessoas. Aba
 
 -  Universidade Federal de Sergipe (UFS)
 
-## Agradecimentos
-
-Agradecemos a todos que contribuíram para o desenvolvimento deste projeto e ajudaram a tornar o jogo mais divertido e interessante.
 
    

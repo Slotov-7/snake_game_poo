@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static utils.ScreenUtils.getScreenHeight;
 import static utils.ScreenUtils.getScreenWidth;
@@ -146,8 +147,14 @@ public class GameOver extends JFrame {
         muteButton.setFocusPainted(false);
         muteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         // Carrega e redimensiona as imagens
-        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonSound.png"));
-        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonMuted.png"));
+        ImageIcon muteIcon = resizeImageIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("assets/buttonSound.png"))));
+        if (muteIcon.getImageLoadStatus() == MediaTracker.ERRORED) {
+            System.out.println("Ícone de mute não encontrado: assets/buttonSound.png");
+        }
+        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("assets/buttonMuted.png"))));
+        if (unmuteIcon.getImageLoadStatus() == MediaTracker.ERRORED) {
+            System.out.println("Ícone de unmute não encontrado: assets/buttonMuted.png");
+        }
         muteButton.setIcon(muteIcon); // Define a imagem no botão
 
         muteButton.addActionListener(e -> {

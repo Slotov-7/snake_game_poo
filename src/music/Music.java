@@ -4,7 +4,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Musica {
+public class Music {
     private Clip clip;
     private boolean isPaused = false;
     private long clipTimePosition = 0;

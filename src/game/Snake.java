@@ -122,7 +122,5 @@ public class Snake {
             g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
         }
     }
-
-
 }
 

@@ -2,7 +2,7 @@ package screen;
 
 import game.GameException;
 import game.GameFrame;
-import music.Musica;
+import music.Music;
 import utils.TextFont;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -14,14 +14,14 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class HomeScreen extends JFrame {
-    private final Musica musica; // Referência para a instância de Musica
+    private final Music music; // Referência para a instância de Music
     private boolean isMuted = false; // Estado do som (mutado ou não)
 
     public HomeScreen() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         Font pixelFont = TextFont.getPixelFont(32f);
         // Inicializa a música
-        musica = new Musica(); // Inicializa a música
-        musica.play("src/music/homescreen.wav"); // Toca a música da tela inicial
+        music = new Music(); // Inicializa a música
+        music.play("src/music/homescreen.wav"); // Toca a música da tela inicial
 
         // Dimensões da janela
         setTitle("SNAKE GAME - HOME SCREEN");
@@ -82,7 +82,7 @@ public class HomeScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (isMuted) {
                     try {
-                        musica.play("src/music/homescreen.wav"); // Retoma a música
+                        music.play("src/music/homescreen.wav"); // Retoma a música
                     } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                         throw new RuntimeException(ex);
 
@@ -92,7 +92,7 @@ public class HomeScreen extends JFrame {
                     }
                     muteButton.setIcon(muteIcon); // Muda para o ícone de mute
                 } else {
-                    musica.stop(); // Para a música
+                    music.stop(); // Para a música
                     muteButton.setIcon(unmuteIcon); // Muda para o ícone de unmute
                 }
                 isMuted = !isMuted; // Alterna o estado
@@ -160,7 +160,7 @@ public class HomeScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Para a música se não estiver mutada
                 if (!isMuted) {
-                    musica.stop();
+                    music.stop();
                 }
 
                 try {
@@ -176,8 +176,8 @@ public class HomeScreen extends JFrame {
 
     @Override
     public void dispose() {
-        if (musica != null) {
-            musica.stop();
+        if (music != null) {
+            music.stop();
         }
         super.dispose();
     }

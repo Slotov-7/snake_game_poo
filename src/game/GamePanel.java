@@ -1,7 +1,7 @@
 package game;
 
 import game.food.*;
-import music.Musica;
+import music.Music;
 import screen.GameOver;
 import utils.TextFont;
 
@@ -30,11 +30,11 @@ public class GamePanel extends JPanel implements ActionListener {
     private Food food;
     public boolean running = false;
     private int DELAY = INITIAL_DELAY;
-    private final Musica musica;
+    private final Music music;
 
     public GamePanel(JFrame frame) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         this.frame = frame;
-        this.musica = new Musica();
+        this.music = new Music();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         snake = new Snake(GAME_UNITS, BODY_PARTS);
         food = generateFood();
@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements ActionListener {
             }
         });
         try {
-            musica.play("src/music/game.wav");
+            music.play("src/music/game.wav");
             startGame();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             throw new GameException("Error during the game initialization: " + e.getMessage());
@@ -142,7 +142,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void gameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException { 
-        musica.stop();
+        music.stop();
         frame.dispose();
         new GameOver(snake.getFoodsEaten()).setVisible(true);
     }

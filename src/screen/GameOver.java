@@ -1,6 +1,7 @@
 package screen;
+import game.GameException;
 import game.GameFrame;
-import music.Musica;
+import music.Music;
 import utils.TextFont;
 
 
@@ -13,12 +14,12 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class GameOver extends JFrame {
-    private final Musica musica;
-
+    private final Music music;
+    private boolean isMuted = false;
     public GameOver(int score) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // Toca a música de game over
-        musica = new Musica();
-        musica.play("src/music/gameover.wav");
+        music = new Music();
+        music.play("src/music/gameover.wav");
         Font pixelFont = TextFont.getPixelFont(32f);
         // Configurações da janela
         this.setTitle("Game Over");
@@ -57,6 +58,7 @@ public class GameOver extends JFrame {
         JButton restartButton = restartButton(pixelFont);
 
         JButton exitButton = exitButton(pixelFont);
+        JButton muteButton = muteButton(pixelFont);
 
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
         buttonPanel.add(homeScreenButton);
@@ -64,6 +66,8 @@ public class GameOver extends JFrame {
         buttonPanel.add(restartButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
         buttonPanel.add(exitButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
+        buttonPanel.add(muteButton); // Adiciona o botão de mute
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
 
         backgroundPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -137,10 +141,49 @@ public class GameOver extends JFrame {
     @Override
     public void dispose() {
         // Para a música quando a tela é fechada
-        if (musica != null) {
-            musica.stop();
+        if (music != null) {
+            music.stop();
         }
         super.dispose(); // Chama o método dispose da superclasse
     }
 
+    private JButton muteButton(Font pixelFont) {
+        JButton muteButton = new JButton();
+        muteButton.setBackground(new Color(248, 155, 155, 255));
+        muteButton.setFocusPainted(false);
+        muteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Carrega e redimensiona as imagens
+        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonSound.png"), 30, 30);
+        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonMuted.png"), 30, 30);
+        muteButton.setIcon(muteIcon); // Define a imagem no botão
+
+        muteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (isMuted) {
+                    try {
+                        music.play("src/music/gameover.wav"); // Retoma a música
+                    } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+                        throw new RuntimeException(ex);
+
+                    } catch (GameException ex) {
+                        throw new GameException("Error: " + ex);
+
+                    }
+                    muteButton.setIcon(muteIcon); // Muda para o ícone de mute
+                } else {
+                    music.stop(); // Para a música
+                    muteButton.setIcon(unmuteIcon); // Muda para o ícone de unmute
+                }
+                isMuted = !isMuted; // Alterna o estado
+            }
+        });
+
+        return muteButton;
+    }
+    private ImageIcon resizeImageIcon(ImageIcon icon, int width, int height) {
+        Image img = icon.getImage(); // Obtém a imagem
+        Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH); // Redimensiona
+        return new ImageIcon(newImg); // Retorna uma nova ImageIcon
+    }
 }

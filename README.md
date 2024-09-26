@@ -1,7 +1,3 @@
-Aqui está a versão atualizada do seu README, com a execução do arquivo .exe como a forma principal:
-
----
-
 # Snake Game
 
 Este é um jogo da cobrinha (Snake) desenvolvido em Java como parte da atividade avaliativa da disciplina de Programação Orientada a Objetos (POO) da Universidade Federal de Sergipe (UFS).

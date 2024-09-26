@@ -21,7 +21,7 @@ public class GameOver extends JFrame {
     public GameOver(int score) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // Toca a música de game over
         music = new Music();
-        music.play("src/music/gameover.wav");
+        music.play("music/gameover.wav");
         Font pixelFont = TextFont.getPixelFont(32f);
         // Configurações da janela
         this.setTitle("Game Over");
@@ -153,7 +153,7 @@ public class GameOver extends JFrame {
         muteButton.addActionListener(e -> {
             if (isMuted) {
                 try {
-                    music.play("src/music/gameover.wav"); // Retoma a música
+                    music.play("music/gameover.wav"); // Retoma a música
                 } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     throw new RuntimeException(ex);
 

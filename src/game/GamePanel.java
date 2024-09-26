@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements ActionListener {
             }
         });
         try {
-            music.play("src/music/game.wav");
+            music.play("music/game.wav");
             startGame();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             throw new GameException("Error during the game initialization: " + e.getMessage());
@@ -111,20 +111,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void checkFood() {// Metodo para verificar se a cobra comeu a comida e aplicar o efeito
         if (snake.getX()[0] == food.getFoodX() && snake.getY()[0] == food.getFoodY()) {
-
-            if (food instanceof SuperApple) {
-                // Aplicar o efeito da SuperApple
-                System.out.println("A cobra comeu uma super maçã!");
-            } else if (food instanceof SuperBanana) {
-                // Aplicar o efeito da SuperBanana
-                System.out.println("A cobra comeu uma super banana!");
-            } else if (food instanceof Apple) {
-                // Aplicar o efeito da Apple
-                System.out.println("A cobra comeu uma maçã!");
-            } else if (food instanceof Banana) {
-                // Aplicar o efeito da Banana
-                System.out.println("A cobra comeu uma banana!");
-            }
             snake.updateFoodsEaten(food);
             food.applyEffect(snake);
             food = generateFood();

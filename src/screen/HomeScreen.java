@@ -11,9 +11,10 @@ import javax.swing.*;
 import java.awt.*;
 
 import java.io.IOException;
+import java.util.Objects;
 
-import static utils.ScreenUtils.getScreenHeight;
-import static utils.ScreenUtils.getScreenWidth;
+//import static utils.ScreenUtils.getScreenHeight;
+//import static utils.ScreenUtils.getScreenWidth;
 
 public class HomeScreen extends JFrame {
     private final Music music; // Referência para a instância de Music
@@ -23,7 +24,7 @@ public class HomeScreen extends JFrame {
         Font pixelFont = TextFont.getPixelFont(32f);
         // Inicializa a música
         music = new Music(); // Inicializa a música
-        music.play("src/music/homescreen.wav"); // Toca a música da tela inicial
+        music.play("music/homescreen.wav"); // Toca a música da tela inicial
 
         // Dimensões da janela
         setTitle("SNAKE GAME - HOME SCREEN");
@@ -75,14 +76,22 @@ public class HomeScreen extends JFrame {
 
 
         // Carrega e redimensiona as imagens
-        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonSound.png"));
-        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonMuted.png"));
+
+        ImageIcon muteIcon = resizeImageIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("assets/buttonSound.png"))));
+        if (muteIcon.getImageLoadStatus() == MediaTracker.ERRORED) {
+            System.out.println("Ícone de mute não encontrado: assets/buttonSound.png");
+        }
+        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("assets/buttonMuted.png"))));
+        if (unmuteIcon.getImageLoadStatus() == MediaTracker.ERRORED) {
+            System.out.println("Ícone de unmute não encontrado: assets/buttonMuted.png");
+        }
+
         muteButton.setIcon(muteIcon); // Define a imagem no botão
 
         muteButton.addActionListener(e -> {// Ação do botão
             if (isMuted) {
                 try {
-                    music.play("src/music/homescreen.wav"); // Retoma a música
+                    music.play("music/homescreen.wav"); // Retoma a música
                 } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
                     throw new RuntimeException(ex);
 

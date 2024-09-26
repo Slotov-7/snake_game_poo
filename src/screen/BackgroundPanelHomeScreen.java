@@ -2,13 +2,17 @@ package screen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class BackgroundPanelHomeScreen extends JPanel {
     private final Image backgroundImage;
 
     public BackgroundPanelHomeScreen() {
-        // Carrega a imagem de fundo
-        backgroundImage = new ImageIcon("src/assets/snakeBG.jpg").getImage();
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("assets/snakeBG.jpg")));
+        if (icon.getImageLoadStatus() == MediaTracker.ERRORED) {
+            System.out.println("Imagem não encontrada: assets/snakeBG.jpg");
+        }
+        backgroundImage = icon.getImage();
     }
 
     @Override

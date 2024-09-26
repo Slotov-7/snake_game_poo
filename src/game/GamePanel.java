@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public static final int UNIT_SIZE = 30;
     public static final int INITIAL_DELAY = 85;
     public static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-    public static final int BODY_PARTS = 4; 
+    public static final int BODY_PARTS = 3;
     Timer timer;
     private final JFrame frame;
     private final Snake snake;
@@ -57,7 +57,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    private Food generateFood() {
+    private Food generateFood() {// Metodo para gerar a comida
         Random random = new Random();
         int type = random.nextInt(8); // Atualizado para considerar 6 tipos
     
@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements ActionListener {
         };
     }
 
-    public void startGame() {
+    public void startGame() {// Metodo para iniciar o jogo
         running = true;
         DELAY = 85;
         timer = new Timer(DELAY, this);
@@ -82,17 +82,15 @@ public class GamePanel extends JPanel implements ActionListener {
         draw(g);
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g) {// Metodo para desenhar os componentes do jogo
         try {
             Font pixelFont = TextFont.getPixelFont(32f);
 
             if (running) {
                 // Desenha a comida
                 food.draw(g);
-
                 // Desenha a cobra
                 snake.draw(g);
-
                 // Exibe o placar
                 g.setColor(Color.BLACK);
                 g.setFont(pixelFont);
@@ -111,8 +109,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-
-    public void checkFood() {
+    public void checkFood() {// Metodo para verificar se a cobra comeu a comida e aplicar o efeito
         if (snake.getX()[0] == food.getFoodX() && snake.getY()[0] == food.getFoodY()) {
 
             if (food instanceof SuperApple) {
@@ -130,28 +127,26 @@ public class GamePanel extends JPanel implements ActionListener {
             }
             snake.updateFoodsEaten(food);
             food.applyEffect(snake);
-            snake.grow();
             food = generateFood();
             DELAY = snake.getDelay();
             timer.setDelay(DELAY);
         }
     }
-
-    public void checkCollisions() { 
+    public void checkCollisions() { // Metodo para verificar se a cobra colidiu com a parede ou com ela mesma
         if (snake.checkCollision() || snake.checkOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
             timer.stop();
             running = false;
         }
     }
 
-    public void gameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException { 
+    public void gameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException { // Metodo para encerrar o jogo
         music.stop();
         frame.dispose();
         new GameOver(snake.getFoodsEaten()).setVisible(true);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {// Metodo para atualizar o jogo
         if (running) {
             snake.move();
             checkFood();

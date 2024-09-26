@@ -8,17 +8,17 @@ public class Banana extends Food {
 
     public Banana(int screenWidth, int screenHeight, int unitSize) {
         super(screenWidth, screenHeight, unitSize);
-        this.foodColor = setColor(); 
+        this.foodColor = getColor();
     }
 
     @Override
-    public Color setColor() {
+    public Color getColor() {
         return Color.YELLOW;
     }
 
     @Override
-    public void applyEffect(Snake snake) {
-        snake.moreParts();
+    public void applyEffect(Snake snake) {//aplica o efeito da banana na cobra
+        snake.grow(1);
         increaseSpeed(snake);
     }
 }

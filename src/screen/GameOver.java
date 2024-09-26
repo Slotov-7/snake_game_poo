@@ -42,7 +42,7 @@ public class GameOver extends JFrame {
         scorePanel.setOpaque(false); // Tornar o painel transparente
         scorePanel.setLayout(new FlowLayout());
 
-        JLabel scoreLabel = new JLabel("Your score: " + score + "!", SwingConstants.CENTER) ;
+        JLabel scoreLabel = new JLabel("Your score: " + score + "!", SwingConstants.CENTER);//mostra a pontuação
         scoreLabel.setFont(pixelFont);
         scoreLabel.setForeground(Color.WHITE);
         scorePanel.add(scoreLabel);
@@ -61,7 +61,7 @@ public class GameOver extends JFrame {
 
         JButton exitButton = exitButton(pixelFont);
         JButton muteButton = muteButton();
-
+        // Adiciona os botões ao painel
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento entre os botões
         buttonPanel.add(homeScreenButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento superior
@@ -76,7 +76,7 @@ public class GameOver extends JFrame {
         add(backgroundPanel);
     }
 
-    private static JButton exitButton(Font pixelFont) {
+    private static JButton exitButton(Font pixelFont) {//botão para sair do jogo
         JButton exitButtonGameOver = new JButton("Exit Game"); //botão para sair do jogo
         exitButtonGameOver.setFont(pixelFont);
         exitButtonGameOver.setForeground(Color.WHITE);
@@ -91,7 +91,7 @@ public class GameOver extends JFrame {
         return exitButtonGameOver;
     }
 
-    private JButton restartButton(Font pixelFont) {
+    private JButton restartButton(Font pixelFont) {//botão para reiniciar o jogo
         JButton restartButton = new JButton("Restart Game"); //botão para reiniciar o jogo
 
         restartButton.setFont(pixelFont);
@@ -111,7 +111,7 @@ public class GameOver extends JFrame {
         return restartButton;
     }
 
-    private JButton homeScreenButton(Font pixelFont) {
+    private JButton homeScreenButton(Font pixelFont) {//botão para reiniciar o jogo
         JButton homeScreenButton = new JButton("Home Screen"); //botão para reiniciar o jogo
         homeScreenButton.setFont(pixelFont);
         homeScreenButton.setForeground(Color.WHITE);
@@ -137,10 +137,10 @@ public class GameOver extends JFrame {
         if (music != null) {
             music.stop();
         }
-        super.dispose(); // Chama o método dispose da superclasse
+        super.dispose(); // Chama o metodo dispose da superclasse
     }
 
-    private JButton muteButton() {
+    private JButton muteButton() {//botão para mutar o som
         JButton muteButton = new JButton();
         muteButton.setBackground(new Color(248, 155, 155, 255));
         muteButton.setFocusPainted(false);

@@ -8,7 +8,7 @@ public class Music {
     private Clip clip;
 
 
-    // Método para tocar a música
+    // Metodo para tocar a música
     public void play(String arquivo) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(arquivo).getAbsoluteFile());
         clip = AudioSystem.getClip();
@@ -17,7 +17,7 @@ public class Music {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    // Método para parar a música
+    // Metodo para parar a música
     public void stop() {
         if (clip != null && clip.isRunning()) {
             clip.stop();

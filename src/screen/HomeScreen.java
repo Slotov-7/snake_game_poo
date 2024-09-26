@@ -67,7 +67,7 @@ public class HomeScreen extends JFrame {
         add(backgroundPanel);
     }
 
-    private JButton muteButton() {
+    private JButton muteButton() {// Botão para mutar/desmutar
         JButton muteButton = new JButton();
         muteButton.setBackground(new Color(248, 155, 155, 255));
         muteButton.setFocusPainted(false);
@@ -79,7 +79,7 @@ public class HomeScreen extends JFrame {
         ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonMuted.png"));
         muteButton.setIcon(muteIcon); // Define a imagem no botão
 
-        muteButton.addActionListener(e -> {
+        muteButton.addActionListener(e -> {// Ação do botão
             if (isMuted) {
                 try {
                     music.play("src/music/homescreen.wav"); // Retoma a música
@@ -107,7 +107,7 @@ public class HomeScreen extends JFrame {
         return new ImageIcon(newImg); // Retorna uma nova ImageIcon
     }
 
-    private JButton exitButton(Font pixelFont) {
+    private JButton exitButton(Font pixelFont) {// Botão "Sair"
         JButton exitButton = new JButton("Exit");
         exitButton.setFont(pixelFont);
         exitButton.setForeground(Color.WHITE);
@@ -116,13 +116,13 @@ public class HomeScreen extends JFrame {
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Ação do botão "Sair"
-        exitButton.addActionListener(e -> {
+        exitButton.addActionListener(e -> {// Fecha o programa
             System.exit(0);  // Fecha o programa
         });
         return exitButton;
     }
 
-    private JButton creditButton(Font pixelFont) {
+    private JButton creditButton(Font pixelFont) {// Botão "Créditos"
         JButton creditButton = new JButton("Credits");
         creditButton.setFont(pixelFont);
         creditButton.setForeground(Color.WHITE);
@@ -140,7 +140,7 @@ public class HomeScreen extends JFrame {
         return creditButton;
     }
 
-    private JButton jButton(Font pixelFont) {
+    private JButton jButton(Font pixelFont) {// Botão "Jogar"
         JButton playButton = new JButton("Play");
         playButton.setFont(pixelFont);
         playButton.setForeground(Color.WHITE);
@@ -165,7 +165,7 @@ public class HomeScreen extends JFrame {
     }
 
     @Override
-    public void dispose() {
+    public void dispose() {// Para a música quando a tela é fechada
         if (music != null) {
             music.stop();
         }

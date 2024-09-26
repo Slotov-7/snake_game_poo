@@ -1,7 +1,6 @@
 package game.food;
 
 import game.Snake;
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class SuperBanana extends Banana {

@@ -4,7 +4,7 @@ import game.food.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import javax.swing.Timer;
+
 
 public class Snake {
     private static final int UNIT_SIZE = 30;

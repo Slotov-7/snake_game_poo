@@ -3,7 +3,7 @@ package game;
 import game.food.*;
 import music.Music;
 import screen.GameOver;
-import utils.TextFont;
+import utils.*;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -16,10 +16,13 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Random;
 
+import static utils.ScreenUtils.getScreenHeight;
+import static utils.ScreenUtils.getScreenWidth;
+
 public class GamePanel extends JPanel implements ActionListener {
 
-    public static final int SCREEN_WIDTH = 1080; 
-    public static final int SCREEN_HEIGHT = 720; 
+    public static final int SCREEN_WIDTH = 1080; // ou usa getScreenWidth();
+    public static final int SCREEN_HEIGHT = 720; // ou usa getScreenHeight();
     public static final int UNIT_SIZE = 30;
     public static final int INITIAL_DELAY = 85;
     public static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;

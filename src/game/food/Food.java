@@ -1,8 +1,6 @@
 package game.food;
-import game.food.*;
 import java.awt.*;
 import java.util.Random;
-import javax.swing.Timer;
 
 import game.Snake;
 
@@ -14,7 +12,6 @@ public abstract class Food {
     protected final int screenHeight;
     protected final int unitSize;
     protected final Random random;
-    Timer timer;
 
     public Food(int screenWidth, int screenHeight, int unitSize) {
         this.screenWidth = screenWidth;

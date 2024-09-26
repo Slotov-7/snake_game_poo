@@ -12,6 +12,9 @@ import java.awt.*;
 
 import java.io.IOException;
 
+import static utils.ScreenUtils.getScreenHeight;
+import static utils.ScreenUtils.getScreenWidth;
+
 public class GameOver extends JFrame {
     private final Music music;
     private boolean isMuted = false;

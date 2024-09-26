@@ -16,7 +16,6 @@ public class TextFont {
             return pixelFont.deriveFont(size);
 
         } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
             System.out.println("Erro ao carregar a fonte.");
         }
         return null; // Retorna null se ocorrer um erro

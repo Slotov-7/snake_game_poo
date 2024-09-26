@@ -12,6 +12,9 @@ import java.awt.*;
 
 import java.io.IOException;
 
+import static utils.ScreenUtils.getScreenHeight;
+import static utils.ScreenUtils.getScreenWidth;
+
 public class HomeScreen extends JFrame {
     private final Music music; // Referência para a instância de Music
     private boolean isMuted = false; // Estado do som (mutado ou não)
@@ -24,8 +27,8 @@ public class HomeScreen extends JFrame {
 
         // Dimensões da janela
         setTitle("SNAKE GAME - HOME SCREEN");
-        int screenWidth = 1080;
-        int screenHeight = 720;
+        int screenWidth = 1080; //ou getScreenWidth();
+        int screenHeight = 720; //ou getScreenHeight();
 
         setSize(screenWidth, screenHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

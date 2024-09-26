@@ -88,7 +88,3 @@ Este projeto foi desenvolvido com o apoio e orientação de várias pessoas. Aba
 ## Licença
 
 - MIT license
-
----
-
-Sinta-se à vontade para substituir o link para o arquivo .exe quando tiver disponível. Se precisar de mais alguma coisa, é só avisar!

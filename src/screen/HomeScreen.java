@@ -9,8 +9,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.IOException;
 
 public class HomeScreen extends JFrame {
@@ -45,7 +44,7 @@ public class HomeScreen extends JFrame {
         JButton creditButton = creditButton(pixelFont);
         JButton exitButton = exitButton(pixelFont);
         // Botão para mutar/desmutar
-        JButton muteButton = muteButton(pixelFont); // Botão para mutar/desmutar
+        JButton muteButton = muteButton(); // Botão para mutar/desmutar
 
         // Adiciona espaçamento entre os botões
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 15))); // Espaçamento superior
@@ -65,7 +64,7 @@ public class HomeScreen extends JFrame {
         add(backgroundPanel);
     }
 
-    private JButton muteButton(Font pixelFont) {
+    private JButton muteButton() {
         JButton muteButton = new JButton();
         muteButton.setBackground(new Color(248, 155, 155, 255));
         muteButton.setFocusPainted(false);
@@ -73,38 +72,35 @@ public class HomeScreen extends JFrame {
 
 
         // Carrega e redimensiona as imagens
-        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonSound.png"), 30, 30);
-        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonMuted.png"), 30, 30);
+        ImageIcon muteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonSound.png"));
+        ImageIcon unmuteIcon = resizeImageIcon(new ImageIcon("src/assets/buttonMuted.png"));
         muteButton.setIcon(muteIcon); // Define a imagem no botão
 
-        muteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (isMuted) {
-                    try {
-                        music.play("src/music/homescreen.wav"); // Retoma a música
-                    } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
-                        throw new RuntimeException(ex);
+        muteButton.addActionListener(e -> {
+            if (isMuted) {
+                try {
+                    music.play("src/music/homescreen.wav"); // Retoma a música
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+                    throw new RuntimeException(ex);
 
-                    } catch (GameException ex) {
-                        throw new GameException("Error: " + ex);
+                } catch (GameException ex) {
+                    throw new GameException("Error: " + ex);
 
-                    }
-                    muteButton.setIcon(muteIcon); // Muda para o ícone de mute
-                } else {
-                    music.stop(); // Para a música
-                    muteButton.setIcon(unmuteIcon); // Muda para o ícone de unmute
                 }
-                isMuted = !isMuted; // Alterna o estado
+                muteButton.setIcon(muteIcon); // Muda para o ícone de mute
+            } else {
+                music.stop(); // Para a música
+                muteButton.setIcon(unmuteIcon); // Muda para o ícone de unmute
             }
+            isMuted = !isMuted; // Alterna o estado
         });
 
         return muteButton;
     }
 
-    private ImageIcon resizeImageIcon(ImageIcon icon, int width, int height) {
+    private ImageIcon resizeImageIcon(ImageIcon icon) {
         Image img = icon.getImage(); // Obtém a imagem
-        Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH); // Redimensiona
+        Image newImg = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH); // Redimensiona
         return new ImageIcon(newImg); // Retorna uma nova ImageIcon
     }
 
@@ -117,11 +113,8 @@ public class HomeScreen extends JFrame {
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Ação do botão "Sair"
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);  // Fecha o programa
-            }
+        exitButton.addActionListener(e -> {
+            System.exit(0);  // Fecha o programa
         });
         return exitButton;
     }
@@ -135,14 +128,11 @@ public class HomeScreen extends JFrame {
         creditButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Ação do botão "Créditos"
-        creditButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JLabel creditsLabel = new JLabel("<html>Developers: <br>\n<br> Alicia Vitoria Sousa Santos <br>\n <br> Allex Lemos de Souza Pinheiro<br>\n <br> Débora Diana Gonçalves dos Santos <br>\n <br> Guilherme Henrique Santos Araújo <br>\n <br> Miguel Lucas Santana Freire <br>\n <br> Rafael Gomes Oliveira Santos <br>\n<br>© 2024 - Snake Game<br> \n <br> All Rights Reserved</html>");
-                Font pixelFont = TextFont.getPixelFont(16f);
-                creditsLabel.setFont(pixelFont);
-                JOptionPane.showMessageDialog(null, creditsLabel, "Credits", JOptionPane.INFORMATION_MESSAGE);
-            }
+        creditButton.addActionListener(e -> {
+            JLabel creditsLabel = new JLabel("<html>Developers: <br>\n<br> Alicia Vitoria Sousa Santos <br>\n <br> Allex Lemos de Souza Pinheiro<br>\n <br> Débora Diana Gonçalves dos Santos <br>\n <br> Guilherme Henrique Santos Araújo <br>\n <br> Miguel Lucas Santana Freire <br>\n <br> Rafael Gomes Oliveira Santos <br>\n<br>© 2024 - Snake Game<br> \n <br> All Rights Reserved</html>");
+            Font pixelFont1 = TextFont.getPixelFont(16f);
+            creditsLabel.setFont(pixelFont1);
+            JOptionPane.showMessageDialog(null, creditsLabel, "Credits", JOptionPane.INFORMATION_MESSAGE);
         });
         return creditButton;
     }
@@ -155,21 +145,18 @@ public class HomeScreen extends JFrame {
         playButton.setFocusPainted(false);
         playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        playButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Para a música se não estiver mutada
-                if (!isMuted) {
-                    music.stop();
-                }
-
-                try {
-                    new GameFrame().setVisible(true);
-                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                dispose();  // Fecha a tela inicial
+        playButton.addActionListener(e -> {
+            // Para a música se não estiver mutada
+            if (!isMuted) {
+                music.stop();
             }
+
+            try {
+                new GameFrame().setVisible(true);
+            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dispose();  // Fecha a tela inicial
         });
         return playButton;
     }

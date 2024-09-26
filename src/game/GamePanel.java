@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements ActionListener {
     private int DELAY = INITIAL_DELAY;
     private final Music music;
 
-    public GamePanel(JFrame frame) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public GamePanel(JFrame frame) {
         this.frame = frame;
         this.music = new Music();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -99,7 +99,7 @@ public class GamePanel extends JPanel implements ActionListener {
                         (SCREEN_WIDTH - metrics.stringWidth(scoreText)) / 2,
                         g.getFont().getSize() + 15);
             } else {
-                gameOver(); // Se o jogo terminou, chama o método de game over
+                gameOver(); // Se o jogo terminou, chama o metodo de fim de jogo
             }
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {

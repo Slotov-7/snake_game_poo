@@ -79,7 +79,7 @@ public class UtilsButtons {
     // Metodo para criar o botão "Mute" usando AtomicBoolean para alternar o estado de som
     public static JButton createMuteButton(Music music, AtomicBoolean isMuted, String musicFile) {
         JButton muteButton = new JButton();
-        muteButton.setBackground(new Color(248, 155, 155, 255));
+        muteButton.setBackground(Color.GRAY);
         muteButton.setFocusPainted(false);
         muteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 

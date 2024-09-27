@@ -16,8 +16,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Random;
 
-import static utils.ScreenUtils.getScreenHeight;
-import static utils.ScreenUtils.getScreenWidth;
 
 public class GamePanel extends JPanel implements ActionListener {
 

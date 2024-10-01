@@ -77,7 +77,7 @@ public class HomeScreen extends JFrame {
         super.dispose();
     }
 
-    public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException { // Método main para a tela inicial
         HomeScreen homeScreen = new HomeScreen();
         homeScreen.setVisible(true);
     }

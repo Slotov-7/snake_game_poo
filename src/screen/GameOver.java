@@ -1,5 +1,6 @@
 package screen;
 
+import game.GameException;
 import music.Music;
 import utils.TextFont;
 import utils.UtilsButtons;
@@ -80,5 +81,15 @@ public class GameOver extends JFrame {
             music.stop();
         }
         super.dispose(); // Chama o metodo dispose da superclasse
+    }
+
+    public static void main(String[] args) {
+        try {
+            GameOver gameOverScreen = new GameOver(0);
+            // Exibe a tela de Game Over
+            gameOverScreen.setVisible(true);
+        } catch (GameException | UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            System.out.println("Error: " + e.getMessage());;
+        }
     }
 }

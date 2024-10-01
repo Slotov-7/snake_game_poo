@@ -98,7 +98,10 @@ public class GamePanel extends JPanel implements ActionListener {
                         (SCREEN_WIDTH - metrics.stringWidth(scoreText)) / 2,
                         g.getFont().getSize() + 15);
             } else {
-                gameOver(); // Se o jogo terminou, chama o metodo de fim de jogo
+                music.stop();
+                frame.dispose();
+                GameOver gameOver = new GameOver(0);
+                gameOver.setVisible(true); // Exibe a tela de Game Over
             }
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -121,12 +124,6 @@ public class GamePanel extends JPanel implements ActionListener {
             timer.stop();
             running = false;
         }
-    }
-
-    public void gameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException { // Metodo para encerrar o jogo
-        music.stop();
-        frame.dispose();
-        new GameOver(snake.getFoodsEaten()).setVisible(true);
     }
 
     @Override

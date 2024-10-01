@@ -100,7 +100,7 @@ public class GamePanel extends JPanel implements ActionListener {
             } else {
                 music.stop();
                 frame.dispose();
-                GameOver gameOver = new GameOver(0);
+                GameOver gameOver = new GameOver(snake.getFoodsEaten());
                 gameOver.setVisible(true); // Exibe a tela de Game Over
             }
 

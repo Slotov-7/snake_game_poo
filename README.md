@@ -70,12 +70,10 @@ Este projeto foi desenvolvido com o apoio e orientação de várias pessoas. Aba
 
 ## Desenvolvedores
 
-- Alícia Vitória Sousa Santos
 - Allex Lemos de Souza Pinheiro
 - Débora Diana Gonçalves dos Santos
 - Guilherme Henrique Santos Araújo
 - Miguel Lucas Santana Freire
-- Rafael Gomes Oliveira Santos
 
 ## Professora
 

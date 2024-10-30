@@ -52,7 +52,7 @@ public class UtilsButtons {
         creditButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         creditButton.addActionListener(e -> {
-            JLabel creditsLabel = new JLabel("<html>Developers: <br>\n<br> Alicia Vitoria Sousa Santos <br>\n <br> Allex Lemos de Souza Pinheiro<br>\n <br> Débora Diana Gonçalves dos Santos <br>\n <br> Guilherme Henrique Santos Araújo <br>\n <br> Miguel Lucas Santana Freire <br>\n <br> Rafael Gomes Oliveira Santos <br>\n<br>© 2024 - Snake Game<br> \n <br> All Rights Reserved</html>");
+            JLabel creditsLabel = new JLabel("<html>Developers: <br> Allex Lemos de Souza Pinheiro<br>\n <br> Débora Diana Gonçalves dos Santos <br>\n <br> Guilherme Henrique Santos Araújo <br>\n <br> Miguel Lucas Santana Freire <br> \n<br>© 2024 - Snake Game<br> \n <br> All Rights Reserved</html>");
             Font pixelFont1 = TextFont.getPixelFont(16f);
             creditsLabel.setFont(pixelFont1);
             JOptionPane.showMessageDialog(null, creditsLabel, "Credits", JOptionPane.INFORMATION_MESSAGE);
